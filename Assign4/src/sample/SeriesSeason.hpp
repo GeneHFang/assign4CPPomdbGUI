@@ -36,12 +36,13 @@ class SeriesSeason {
         string rating;
         string genre;
         string imgURL; 
+        string plot;
         vector<Episodes> episodes;
 
 
         //constructors/destructor
         SeriesSeason();
-        SeriesSeason(string title, string season, string rating, string genre, string imgurl, vector<Episodes> episodes);
+        SeriesSeason(string title, string season, string rating, string genre, string imgurl, string plot, vector<Episodes> episodes);
         SeriesSeason(const Json::Value& jsonObj);
         SeriesSeason(string jsonString);
         ~SeriesSeason();
@@ -56,5 +57,5 @@ class SeriesSeason {
         void fromJson(Json::Value json);
 
         //setter
-        void setValues(string title, string season, string rating, string genre, string imgurl, vector<Episodes> episodes);
+        void setValues(string title, string season, string rating, string genre, string imgurl, string plot, vector<Episodes> episodes);
 }

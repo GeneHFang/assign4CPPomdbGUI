@@ -32,17 +32,20 @@ SeriesSeason::SeriesSeason(){
     rating="";
     genre="";
     imgURL="";
+    plot="";
     //episodes=null;
 }
 
 
-SeriesSeason::SeriesSeason(string ptitle, string pseason, string prating, string pgenre, string pimgurl, vector<Episode> pepisodes){
+SeriesSeason::SeriesSeason(string ptitle, string pseason, string prating, 
+    string pgenre, string pimgurl, string pplot, vector<Episode> pepisodes){
     title=ptitle;
     titleAndSeason=ptitle+" - Season "+pseason;
     season = stoi(pseason);
     rating = prating;
     genre = pgenre;
     imgURL = pimgurl;
+    plot=pplot;
     episodes = pepisodes;
 }
 
@@ -62,7 +65,9 @@ SeriesSeason::SeriesSeason(const Json::Value& jsonObj){
             imgURL = js.asString();
         } else if (*i=="Season"){
             season = stoi(js.asString());
-        }else if (*i=="Episodes"){
+        } else if (*i=="Plot"){
+            plot = js.asString();
+        } else if (*i=="Episodes"){
             auto jsonEpisodes = jsonObj[*i];
             for (Json::Value::ArrayIndex i = 0 ; i != jsonEpisodes.size(); i++){
                 Episode ep(jsonEpisodes[i]);
@@ -83,11 +88,42 @@ SeriesSeason::SeriesSeason(const Json::Value& jsonObj){
 
 SeriesSeason::SeriesSeason(string jsonString){
     Json::Reader reader;
-    Json::Value root;
+    Json::Value jsonObj;
 
-    bool parseSuccess = reader.parse(jsonString, root, false);
+    bool parseSuccess = reader.parse(jsonString, jsonObj, false);
     if (parseSuccess){
-        SeriesSeason::SeriesSeason(root);
+        Json::Value::Members mbr = jsonObj.getMemberNames();
+
+        for (vector<string>::const_iterator i = mbr.begin(); i != mbr.end(); i++){
+            Json::Value js = jsonObj[*i];
+            if (*i=="Title"){
+                title = js.asString();
+            } else if (*i=="imdbRating"){
+                rating = js.asString();
+            } else if (*i=="Genre"){
+                genre = js.asString();
+            } else if (*i=="Poster"){
+                imgURL = js.asString();
+            } else if (*i=="Season"){
+                season = stoi(js.asString());
+            } else if (*i=="Plot"){
+                plot = js.asString();
+            } else if (*i=="Episodes"){
+                auto jsonEpisodes = jsonObj[*i];
+                for (Json::Value::ArrayIndex i = 0 ; i != jsonEpisodes.size(); i++){
+                    Episode ep(jsonEpisodes[i]);
+                    
+                    /* Goes into Episode constructor
+                    string t = jsonEpisodes[i]["Title"].asString();
+                    int num = stoi(jsonEpisodes[i]["Episode"].asString());
+                    string rate = jsonEpisodes[i]["imdbRating"].asString();
+                    Episode ep(t, num, rate);
+                    */
+                    episodes.push_back(ep);
+                }
+            }
+        }
+        titleAndSeason = title + " - Season " + season;
     }
     else{
         cout << "Constructor parse error with " << jsonString << endl;
@@ -100,6 +136,7 @@ SeriesSeason::~SeriesSeason(){
     genre="";
     imgURL="";
     season=-1;
+    plot="";
     //episodes = 0; 
 }
 
@@ -107,6 +144,13 @@ SeriesSeason::~SeriesSeason(){
 string SeriesSeason::toString(){
     string ret= "{}";
 
+    Json::Value jsonLib = SeriesSeason::toJson();
+    ret = jsonLib.toStyledString();
+    return ret;
+}
+
+
+Json::Value SeriesSeason::toJson(){
     Json::Value jsonLib;
 
     jsonLib["Title"] = title;
@@ -114,6 +158,7 @@ string SeriesSeason::toString(){
     jsonLib["Season"] = season;
     jsonLib["Poster"] = imgURL;
     jsonLib["Genre"] = genre;
+    jsonLib["Plot"] = plot;
     
     string jsonEpisodes = "{\"Episodes\":[" 
     for (int i = 0 ; i < episodes.size() ; i++ ){
@@ -125,13 +170,22 @@ string SeriesSeason::toString(){
 
     Json::Reader r;
     Json::Value epp; 
-
     reader.parse(jsonEpisodes, epp, false);
-
     auto episodeArray = epp["Episodes"];
-
     jsonLib["Episodes"] = episodeArray;
-    
 
+    return jsonLib;
 
 }
+
+void SeriesSeason::setValues(string ptitle, string pseason, string prating, 
+    string pgenre, string pimgurl, string pplot, vector<Episode> pepisodes){
+        title=ptitle;
+        titleAndSeason=ptitle+" - Season "+pseason;
+        season = stoi(pseason);
+        rating = prating;
+        genre = pgenre;
+        imgURL = pimgurl;
+        plot = pplot;
+        episodes = pepisodes;
+    }
