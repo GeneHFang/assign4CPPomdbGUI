@@ -56,5 +56,5 @@ class SeriesSeason {
         void fromJson(Json::Value json);
 
         //setter
-        void setValues(string title, string season, string rating, string genre, string imgurl);
+        void setValues(string title, string season, string rating, string genre, string imgurl, vector<Episodes> episodes);
 }
