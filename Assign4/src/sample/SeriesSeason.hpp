@@ -58,4 +58,7 @@ class SeriesSeason {
 
         //setter
         void setValues(string title, string season, string rating, string genre, string imgurl, string plot, vector<Episodes> episodes);
+
+        //log to console
+        void print();
 }

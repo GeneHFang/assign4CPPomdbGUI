@@ -51,4 +51,7 @@ class Episode{
     //setter
     void setValues(string ptitle, int pepisode, string prating);
 
+    //Log to Console
+    void print();
+
 }

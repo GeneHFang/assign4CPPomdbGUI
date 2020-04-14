@@ -10,19 +10,16 @@
 
 using namespace std;
 /**
- * Copyright 2020 Tim Lindquist,
+ * Copyright 2020 Tim Lindquist, Gene Li
  *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- * http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
+ * This software is the intellectual property of the author, and can not be 
+ * distributed, used, copied, or reproduced, in whole or in part, for any purpose, commercial or otherwise.
+ * The author grants the ASU Software Engineering program the right to copy, execute, and evaluate this
+ * work for the purpose of determining performance of the author in coursework,
+ * and for Software Engineering program evaluation, so long as this copyright and
+ * right-to-use statement is kept in-tact in such use.
+ * All other uses are prohibited and reserved to the author.
+ * 
  *
  * Purpose: MediaLibrary is a class defining the interface between clients
  * and the server. The server implementation of MediaLibrary
@@ -30,8 +27,9 @@ using namespace std;
  * Ser321 Principles of Distributed Software Systems
  * see http://pooh.poly.asu.edu/Ser321
  * @author Tim Lindquist Tim.Lindquist@asu.edu
+ *         Gene H Li ghli1@asu.edu
  *         Software Engineering, CIDSE, IAFSE, ASU Poly
- * @version January 2020
+ * @version April 2020
  */
 
 MediaLibrary::MediaLibrary(){
@@ -52,7 +50,7 @@ bool MediaLibrary::initLibraryFromJsonFile(string jsonFileName){
       Json::Value::Members mbr = root.getMemberNames();
       for(vector<string>::const_iterator i = mbr.begin(); i!= mbr.end(); i++){
          Json::Value jsonMedia = root[*i];
-         MediaDescription * aDesc = new MediaDescription(jsonMedia);
+         SeriesSeason * aDesc = new SeriesSeason(jsonMedia);
          media[*i] = *aDesc;
          cout << "adding ";
          aDesc->print();
@@ -65,11 +63,11 @@ bool MediaLibrary::initLibraryFromJsonFile(string jsonFileName){
 bool MediaLibrary::toJsonFile(string jsonFileName){
    bool ret = false;
    Json::Value jsonLib;
-   for(std::map<string,MediaDescription>::iterator i = media.begin();
+   for(std::map<string,SeriesSeason>::iterator i = media.begin();
                                                          i!= media.end(); i++){
       string key = i->first;
       cout << key << " " << endl;
-      MediaDescription aMedia = media[key];
+      SeriesSeason aMedia = media[key];
       Json::Value jsonMedia = aMedia.toJson();
       jsonLib[key] = jsonMedia;
    }
@@ -79,14 +77,14 @@ bool MediaLibrary::toJsonFile(string jsonFileName){
    return true;
 }
 
-MediaDescription MediaLibrary::get(string aTitle){
-   MediaDescription aMedia = media[aTitle];
+SeriesSeason MediaLibrary::get(string aTitle){
+   SeriesSeason aMedia = media[aTitle];
    return aMedia;
 }
 
 vector<string> MediaLibrary::getTitles(){
    vector<string> myVec;
-   for(map<string,MediaDescription>::iterator it = media.begin();
+   for(map<string,SeriesSeason>::iterator it = media.begin();
                                               it != media.end();++it){
       myVec.push_back(it->first);
    }

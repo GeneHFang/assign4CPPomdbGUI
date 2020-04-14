@@ -16,7 +16,7 @@
  * All other uses are prohibited and reserved to the author.
  * 
  *
- * Purpose: Implementation of SeriesSeason. SeriesSeason is a class whose properties describe a single SeriesSeason.
+ * Purpose: SeriesSeason is a class whose properties describe a single SeriesSeason.
  * Ser321 Principles of Distributed Software Systems
  * see http://pooh.poly.asu.edu/Ser321
  * @author Tim Lindquist Tim.Lindquist@asu.edu
@@ -188,4 +188,21 @@ void SeriesSeason::setValues(string ptitle, string pseason, string prating,
         imgURL = pimgurl;
         plot = pplot;
         episodes = pepisodes;
-    }
+}
+
+
+void SeriesSeason::print(){
+    cout << SeriesSeason::toString() << endl;
+    // cout << "Title: " << title << endl;
+    // cout << "Season: " << season << endl;
+    // cout << "Rating: " << rating << endl;
+    // cout << "Genre: " << genre << endl;
+    // cout << "Plot: " << plot << endl;
+    // cout << "Poster: " << imgURL << endl;
+    // cout << "Episodes: [" << endl;
+
+    // for (int i = 0 ; i < episodes.size() ; i++)
+    // {
+    //     episodes[i].
+    // }
+}

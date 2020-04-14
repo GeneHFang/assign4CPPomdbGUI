@@ -19,38 +19,30 @@
 using namespace std;
 
 /**
- * Copyright (c) 2020 Tim Lindquist,
+ * Copyright (c) 2020 Tim Lindquist, Gene Li
  * Software Engineering,
  * Arizona State University at the Polytechnic campus
+ * 
+ * This software is the intellectual property of the author, and can not be 
+ * distributed, used, copied, or reproduced, in whole or in part, for any purpose, commercial or otherwise.
+ * The author grants the ASU Software Engineering program the right to copy, execute, and evaluate this
+ * work for the purpose of determining performance of the author in coursework,
+ * and for Software Engineering program evaluation, so long as this copyright and
+ * right-to-use statement is kept in-tact in such use.
+ * All other uses are prohibited and reserved to the author.
  * <p/>
- * This program is free software; you can redistribute it and/or
- * modify it under the terms of the GNU General Public License
- * as published by the Free Software Foundation version 2
- * of the License.
- * <p/>
- * This program is distributed in the hope that it will be useful,
- * but without any warranty or fitness for a particular purpose.
- * <p/>
- * Please review the GNU General Public License at:
- * http://www.gnu.org/licenses/gpl-2.0.html
- * see also: https://www.gnu.org/licenses/gpl-faq.html
- * so you are aware of the terms and your rights with regard to this software.
- * Or, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301,USA
- * <p/>
- * Purpose: Sample C++ FLTK view class. MediaClientGui constructs the view
+ * Purpose: Modified sample C++ FLTK view class to suit assignment needs. MediaClientGui constructs the view
  * for media app. This class is extended by the client controller which is
  * the MediaClient class. MediaClient defines the call-backs for UI controls.
- * It contains sample control functions that respond to button clicks and tree
- * selects.
- * This software is meant to run on Debian Wheezy Linux
+ * 
  * <p/>
  * Ser321 Principles of Distributed Software Systems
  * see http://pooh.poly.asu.edu/Ser321
- * @author Tim Lindquist (Tim.Lindquist@asu.edu) CIDSE - Software Engineering,
- *                       IAFSE, ASU at the Polytechnic campus
+ * @author Tim Lindquist Tim.Lindquist@asu.edu 
+ *         Gene Li ghli1@asu.edu
+ *         Software Engineering, CIDSE, IAFSE, ASU Poly
  * @file    MediaClientGui.cpp
- * @date    January, 2020
+ * @date    April 2020
  **/
 class MediaClientGui : public Fl_Window {
 protected:
