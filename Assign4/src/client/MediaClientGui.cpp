@@ -137,7 +137,7 @@ public:
 
       // create a tree control at position x=10, y=10. Its 150 pixels wide
       // and window height less 20 pixels high. Add some sample tree nodes.
-      // tree = new Fl_Tree(10, 120, 325, this->h()-135);
+      tree = new Fl_Tree(10, 120, 325, this->h()-135);
       // tree->add("Flintstones/Fred");
       // tree->add("Flintstones/Wilma");
       // tree->close("/Flintstones");
