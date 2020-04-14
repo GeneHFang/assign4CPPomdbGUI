@@ -84,7 +84,8 @@ Episode::Episode(string jsonString){
                 rating = js.asString();
             } else if (*i=="Episode"){
                 episode = stoi(js.asString());
-            } 
+            }
+        } 
     }
     else{
         cout << "Constructor parse error with " << jsonString << endl;
