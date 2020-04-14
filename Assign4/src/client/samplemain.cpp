@@ -272,7 +272,7 @@ public:
       for(int i=0; i<result.size(); i++){
          cout << " " << result[i];
          SeriesSeason md = library->get(result[i]);
-         cout << md.title << " " << md.seriesSeason << " " << md.rating
+         cout << md.title << " " << md.titleAndSeason << " " << md.rating
               << " " << md.genre << endl;
       }
       cout << endl;
