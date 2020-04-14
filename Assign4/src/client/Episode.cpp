@@ -41,27 +41,30 @@ Episode::Episode(string ptitle, int pepisode, string prating){
 
 //Constructor from JSON value
 Episode::Episode(const Json::Value& jsonObj){
-     Json::Reader reader;
-   Json::Value root;
-   bool parseSuccess = reader.parse(jsonString,root,false);
-   if(parseSuccess){
-      //cout << "successful parse" << endl;
-      Json::Value::Members mbr = root.getMemberNames();
-      for(vector<string>::const_iterator i = mbr.begin(); i!= mbr.end(); i++){
-         //cout << *i << " " << endl;
-         Json::Value jsonM = root[*i];
-         if(*i=="Title"){
+    Json::Reader reader;
+    Json::Value root;
+
+    string jsonString = jsonObj.toStyledString();
+
+    bool parseSuccess = reader.parse(jsonString,root,false);
+    if(parseSuccess){
+        //cout << "successful parse" << endl;
+        Json::Value::Members mbr = root.getMemberNames();
+        for(vector<string>::const_iterator i = mbr.begin(); i!= mbr.end(); i++){
+            //cout << *i << " " << endl;
+            Json::Value jsonM = root[*i];
+            if(*i=="Title"){
             title = jsonM.asString();
-         }else if(*i=="Episode"){
+            }else if(*i=="Episode"){
             episode = stoi(jsonM.asString());
-         }else if(*i=="rating"){
+            }else if(*i=="rating"){
             rating = jsonM.asString();
-         }
-      }
-   }else{
-      cout << "MediaDescription constructor parse error with input: " << jsonString
-           << endl;
-   }
+            }
+        }
+    }else{
+        cout << "MediaDescription constructor parse error with input: " << jsonString
+            << endl;
+}
 }
 
 //Constructor from json formatted string
@@ -100,7 +103,7 @@ string Episode::toString(){
     Json::Value jsonObj;
     string ret = "{}";
     jsonObj = toJson();
-    ret = jsonLib.toStyledString();
+    ret = jsonObj.toStyledString();
     return ret;
 }
 
