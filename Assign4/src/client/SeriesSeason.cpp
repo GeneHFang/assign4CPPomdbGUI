@@ -83,7 +83,7 @@ SeriesSeason::SeriesSeason(const Json::Value& jsonObj){
             }
         }
     }
-    titleAndSeason = title + " - Season " + season;
+    titleAndSeason = title + " - Season " + to_string(season);
 }
 
 //Constructor from json formatted String
@@ -124,7 +124,7 @@ SeriesSeason::SeriesSeason(string jsonString){
                 }
             }
         }
-        titleAndSeason = title + " - Season " + season;
+        titleAndSeason = title + " - Season " + to_string(season);
     }
     else{
         cout << "Constructor parse error with " << jsonString << endl;
