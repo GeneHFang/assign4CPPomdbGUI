@@ -132,7 +132,7 @@ public:
          curlpp::Easy myRequest;
          myRequest.setOpt(new curlpp::options::WriteStream(&os));
          //curlpp::options::Url myUrl(std::string(url));
-         myRequest.setOpt(new curlpp::options::Url(seasonSearchURL.c_str()));
+         myRequest.setOpt(new curlpp::options::Url(seasonSearchUrl.c_str()));
          myRequest.perform();
          std::string seasonString = os.str();
          
@@ -145,7 +145,7 @@ public:
          curlpp::Easy myRequest2;
          myRequest2.setOpt(new curlpp::options::WriteStream(&os2));
          //curlpp::options::Url myUrl(std::string(url));
-         myRequest2.setOpt(new curlpp::options::Url(seriesSearchURL.c_str()));
+         myRequest2.setOpt(new curlpp::options::Url(seriesSearchUrl.c_str()));
          myRequest2.perform();
          std::string seriesString = os2.str();
          
