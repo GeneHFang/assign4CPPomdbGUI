@@ -164,7 +164,8 @@ Json::Value SeriesSeason::toJson(){
     jsonLib["Plot"] = plot;
     
     string jsonEpisodes = "{\"Episodes\":[" 
-    for (int i = 0 ; i < episodes.size() ; i++ ){
+    int i;
+    for(i = 0 ; i < episodes.size() ; i++ ){
         if (i = episodes.size()-1) {
             jsonEpisodes+=(episodes[i].toString()+"]}");
         }
@@ -173,7 +174,7 @@ Json::Value SeriesSeason::toJson(){
 
     Json::Reader r;
     Json::Value epp; 
-    reader.parse(jsonEpisodes, epp, false);
+    r.parse(jsonEpisodes, epp, false);
     auto episodeArray = epp["Episodes"];
     jsonLib["Episodes"] = episodeArray;
 
