@@ -298,10 +298,14 @@ public:
       menubar->callback(Menu_ClickedS, (void*)this);
       tree->callback(TreeCallbackS, (void*)this);
       callback(ClickedX);
+      std::cout << "before Library is created" << std::endl;
       omdbkey = key;
       userId = "Tim.Lindquist";
       library = new MediaLibrary();
+      
+      std::cout << "before tree is built" << std::endl;
       buildTree();
+      std::cout << "after tree is built" << std::endl;
    }
 };
 
