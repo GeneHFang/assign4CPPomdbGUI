@@ -124,19 +124,33 @@ public:
             }
          }
          /*
-         * Another API call would have to be made here to get
-         * the rest of the required information. Same as assignment 2.
+         * Series and Season API call
          */
-         url = url + "&t=" + urlEncodedQuery + "&season=" + o->seasonSrchInput->value();
-         cout << "sending request url: " << url << endl;
+         std::string seasonSearchUrl = url + "&t=" + urlEncodedQuery + "&season=" + o->seasonSrchInput->value();
+         cout << "sending request url: " << seasonSearchUrl << endl;
          std::ostringstream os;
          curlpp::Easy myRequest;
          myRequest.setOpt(new curlpp::options::WriteStream(&os));
          //curlpp::options::Url myUrl(std::string(url));
-         myRequest.setOpt(new curlpp::options::Url(url.c_str()));
+         myRequest.setOpt(new curlpp::options::Url(seasonSearchURL.c_str()));
          myRequest.perform();
-         std::string aString = os.str();
-         SeriesSeason s(aString);
+         std::string seasonString = os.str();
+         
+         /*
+         * Series only API call
+         */
+         std::string seriesSearchUrl = url + "&t=" + urlEncodedQuery;
+         cout << "sending request url: " << seriesSearchUrl << endl;
+         std::ostringstream os2;
+         curlpp::Easy myRequest2;
+         myRequest2.setOpt(new curlpp::options::WriteStream(&os2));
+         //curlpp::options::Url myUrl(std::string(url));
+         myRequest2.setOpt(new curlpp::options::Url(seriesSearchURL.c_str()));
+         myRequest2.perform();
+         std::string seriesString = os2.str();
+         
+
+         SeriesSeason s(os2);
          s.print();
          std::cout << aString << std::endl;
       }catch ( curlpp::LogicError & e ) {
