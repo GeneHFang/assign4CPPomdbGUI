@@ -295,8 +295,11 @@ public:
       
       std::cout << "before callbacks are set" << std::endl;
       searchButt->callback(SearchCallbackS, (void*)this);
+      std::cout << "after search button set" << std::endl;
       menubar->callback(Menu_ClickedS, (void*)this);
+      std::cout << "after menu bar set" << std::endl;
       tree->callback(TreeCallbackS, (void*)this);
+      std::cout << "after tree callback set" << std::endl;
       callback(ClickedX);
       std::cout << "before Library is created" << std::endl;
       omdbkey = key;
