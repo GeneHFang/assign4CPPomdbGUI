@@ -54,4 +54,4 @@ class Episode{
     //Log to Console
     void print();
 
-}
+};
