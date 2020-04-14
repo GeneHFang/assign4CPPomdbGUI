@@ -104,6 +104,7 @@ public:
     * Static search button callback method.
     */
    static void SearchCallbackS(Fl_Widget*w, void*data) {
+      std::cout << "before MediaClient is created" << std::endl;
       MediaClient *o = (MediaClient*)data;
       cout << "Search Clicked. You asked for a OMDb search of Season: " <<
          o->seasonSrchInput->value() << " Series: " <<
@@ -146,6 +147,7 @@ public:
 
    // Static menu callback method
    static void TreeCallbackS(Fl_Widget*w, void*data) {
+      std::cout << "before MediaClient is created" << std::endl;
       MediaClient *o = (MediaClient*)data;
       o->TreeCallback(); //call the instance callback method
    }
@@ -155,6 +157,7 @@ public:
     * collapse.
     */
    void TreeCallback() {
+      std::cout << "before FLTreeItem is created" << std::endl;
       // Find item that was clicked
       Fl_Tree_Item *item = (Fl_Tree_Item*)tree->item_clicked();
       cout << "Tree callback. Item selected: ";
@@ -197,12 +200,15 @@ public:
 
    // Static menu callback method
    static void Menu_ClickedS(Fl_Widget*w, void*data) {
+      std::cout << "before MediaClient is created" << std::endl;
       MediaClient *o = (MediaClient*)data;
       o->Menu_Clicked(); //call the instance callback method
    }
 
    // Menu selection instance method that has ccess to instance vars.
    void Menu_Clicked() {
+      
+      std::cout << "before char size 80 is created" << std::endl;
       char picked[80];
       menubar->item_pathname(picked, sizeof(picked)-1);
       string selectPath(picked);
@@ -234,6 +240,8 @@ public:
     * begining or end of a string.
     */
    static std::string& trimMe (std::string& str) {
+      
+      std::cout << "trimming" << std::endl;
       // right trim
       while (str.length() > 0 && (str[str.length()-1] == ' '  ||
                                   str[str.length()-1] == '\t' ||
@@ -253,6 +261,8 @@ public:
     * the resulting string.
     */
    std::string exec(const char* cmd) {
+      
+      std::cout << "before File is created" << std::endl;
       FILE* pipe = popen(cmd, "r");
       if (!pipe) return "ERROR";
       char buffer[128];
@@ -266,6 +276,8 @@ public:
    }
 
    void buildTree(){
+      
+      std::cout << "before vector of results is created" << std::endl;
       vector<string> result = library->getTitles();
       cout << "server has titles";
       tree->clear();
@@ -280,6 +292,8 @@ public:
    }
 
    MediaClient(const char * name = "Tim", const char * key = "myKey") : MediaClientGui(name) {
+      
+      std::cout << "before callbacks are set" << std::endl;
       searchButt->callback(SearchCallbackS, (void*)this);
       menubar->callback(Menu_ClickedS, (void*)this);
       tree->callback(TreeCallbackS, (void*)this);
@@ -292,6 +306,8 @@ public:
 };
 
 int main(int argc, char * argv[]) {
+   
+   std::cout << "before main begins" << std::endl;
    std::string developer = (argc>1)?argv[1]:"Tim.Lindquist";
    std::string omdbkey = (argc>2)?argv[2]:"omdbkey";
    std::string windowTitle = developer + "'s SeriesSeason Browser";

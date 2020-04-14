@@ -27,6 +27,8 @@
 
 //Default constructor
 SeriesSeason::SeriesSeason(){
+    
+    cout << "SS default constructor" << endl;
     title="";
     titleAndSeason="";
     season=-1;
@@ -40,6 +42,7 @@ SeriesSeason::SeriesSeason(){
 //Constructor from individual values
 SeriesSeason::SeriesSeason(string ptitle, string pseason, string prating, 
     string pgenre, string pimgurl, string pplot, vector<Episode> pepisodes){
+    cout << "SS values constructor" << endl;
     title=ptitle;
     titleAndSeason=ptitle+" - Season "+pseason;
     season = stoi(pseason);
@@ -52,6 +55,7 @@ SeriesSeason::SeriesSeason(string ptitle, string pseason, string prating,
 
 //Constructor from jsonObj
 SeriesSeason::SeriesSeason(const Json::Value& jsonObj){
+    cout << "SS json constructor" << endl;
     Json::Value::Members mbr = jsonObj.getMemberNames();
 
     for (vector<string>::const_iterator i = mbr.begin(); i != mbr.end(); i++){
@@ -88,6 +92,7 @@ SeriesSeason::SeriesSeason(const Json::Value& jsonObj){
 
 //Constructor from json formatted String
 SeriesSeason::SeriesSeason(string jsonString){
+    cout << "SS string constructor" << endl;
     Json::Reader reader;
     Json::Value jsonObj;
 
@@ -133,6 +138,8 @@ SeriesSeason::SeriesSeason(string jsonString){
 
 //Destructor
 SeriesSeason::~SeriesSeason(){
+    
+    cout << "SS destructor" << endl;
     title="";
     rating="";
     genre="";
@@ -144,6 +151,7 @@ SeriesSeason::~SeriesSeason(){
 
 //Convert current object to json formatted string
 string SeriesSeason::toString(){
+    cout << "SS to json string" << endl;
     string ret= "{}";
 
     Json::Value jsonLib;
@@ -154,6 +162,7 @@ string SeriesSeason::toString(){
 
 //Convert current object to JSON value
 Json::Value SeriesSeason::toJson(){
+    cout << "SS to json" << endl;
     Json::Value jsonLib;
 
     jsonLib["Title"] = title;
@@ -185,6 +194,7 @@ Json::Value SeriesSeason::toJson(){
 //Setter
 void SeriesSeason::setValues(string ptitle, string pseason, string prating, 
     string pgenre, string pimgurl, string pplot, vector<Episode> pepisodes){
+    cout << "SS setter" << endl;
         title=ptitle;
         titleAndSeason=ptitle+" - Season "+pseason;
         season = stoi(pseason);
@@ -197,6 +207,7 @@ void SeriesSeason::setValues(string ptitle, string pseason, string prating,
 
 //Log to console
 void SeriesSeason::print(){
+    cout << "SS printer" << endl;
     cout << toString() << endl;
     // cout << "Title: " << title << endl;
     // cout << "Season: " << season << endl;
