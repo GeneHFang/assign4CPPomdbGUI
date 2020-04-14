@@ -163,9 +163,9 @@ Json::Value SeriesSeason::toJson(){
     jsonLib["Genre"] = genre;
     jsonLib["Plot"] = plot;
     
-    string jsonEpisodes = "{\"Episodes\":[" 
-    int i;
-    for(i = 0 ; i < episodes.size() ; i++ ){
+    string jsonEpisodes = "{\"Episodes\":[";
+    
+    for(int i = 0 ; i < episodes.size() ; i++ ){
         if (i = episodes.size()-1) {
             jsonEpisodes+=(episodes[i].toString()+"]}");
         }
