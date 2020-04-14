@@ -136,12 +136,8 @@ public:
          myRequest.setOpt(new curlpp::options::Url(url.c_str()));
          myRequest.perform();
          std::string aString = os.str();
-         try { SeriesSeason s(aString);
-               s.print();
-         } catch (e) {
-            std::cout << e.what() << std::endl
-         }
-
+         SeriesSeason s(aString);
+         s.print();
          std::cout << aString << std::endl;
       }catch ( curlpp::LogicError & e ) {
          std::cout << e.what() << std::endl;
