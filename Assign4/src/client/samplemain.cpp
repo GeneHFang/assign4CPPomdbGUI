@@ -150,9 +150,11 @@ public:
          std::string seriesString = os2.str();
          
 
-         SeriesSeason s(os2);
+         SeriesSeason s(seriesString);
          s.print();
-         std::cout << aString << std::endl;
+         std::cout << "Series :"<< seriesString << std::endl;
+         
+         std::cout << "Season : "<< seasonString << std::endl;
       }catch ( curlpp::LogicError & e ) {
          std::cout << e.what() << std::endl;
       }
