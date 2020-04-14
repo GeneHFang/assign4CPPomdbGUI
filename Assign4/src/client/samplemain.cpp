@@ -181,7 +181,7 @@ public:
             break;
          }
          cout << "media: "<< md.titleAndSeason << " " << md.title << " "
-              << md.rating << " " << md.genre << " " << md.plot << " " << md.imageURL
+              << md.rating << " " << md.genre << " " << md.plot << " " << md.imgURL
               << endl;
          episodeInput->value(md.title.c_str());
          seriesSeasonInput->value(md.titleAndSeason.c_str());
@@ -271,7 +271,7 @@ public:
       tree->clear();
       for(int i=0; i<result.size(); i++){
          cout << " " << result[i];
-         MediaDescription md = library->get(result[i]);
+         SeriesSeason md = library->get(result[i]);
          cout << md.title << " " << md.seriesSeason << " " << md.rating
               << " " << md.genre << endl;
       }
