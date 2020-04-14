@@ -33,7 +33,7 @@ using namespace std;
  */
 
 MediaLibrary::MediaLibrary(){
-   initLibraryFromJsonFile("series.json");
+   initLibraryFromJsonFile("seriesTest.json");
 }
 
 MediaLibrary::~MediaLibrary() {
@@ -51,6 +51,7 @@ bool MediaLibrary::initLibraryFromJsonFile(string jsonFileName){
       for(vector<string>::const_iterator i = mbr.begin(); i!= mbr.end(); i++){
          Json::Value jsonMedia = root[*i];
          SeriesSeason * aDesc = new SeriesSeason(jsonMedia);
+         cout << *i << endl;
          media[*i] = *aDesc;
          cout << "adding ";
          aDesc->print();

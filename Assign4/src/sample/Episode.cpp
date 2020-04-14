@@ -25,18 +25,21 @@
  * @version April 2020
  */
 
+//Default constructor
 Episode::Episode(){
     title="";
     episode=-1;
     rating="";
 }
 
+//Constructor from individual values
 Episode::Episode(string ptitle, int pepisode, string prating){
     title = ptitle;
     episode = pepisode;
     rating = prating;
 }
 
+//Constructor from JSON value
 Episode::Episode(const Json::Value& jsonObj){
      Json::Reader reader;
    Json::Value root;
@@ -61,6 +64,7 @@ Episode::Episode(const Json::Value& jsonObj){
    }
 }
 
+//Constructor from json formatted string
 Episode::Episode(string jsonString){
     Json::Reader reader;
     Json::Value jsonObj;
@@ -84,19 +88,23 @@ Episode::Episode(string jsonString){
     }
 }
 
+//Destrcutor
 Episode::~Episode(){
     title="";
     episode=-1;
     rating="";
 }
 
+//Convert current object to json formatted string
 string Episode::toString(){
+    Json::Value jsonObj;
     string ret = "{}";
-    Episode::toJson();
+    jsonObj = toJson();
     ret = jsonLib.toStyledString();
     return ret;
 }
 
+//Convert current object to json value
 Json::Value Episode::toJson(){
     Json::Value jsonLib;
     jsonLib["Title"] = title;
@@ -105,12 +113,14 @@ Json::Value Episode::toJson(){
     return jsonLib;
 }
 
+//Setter
 void Episode::setValues(string ptitle, int pepisode, string prating){
     title = ptitle;
     episode = pepisode;
     rating = prating;
 }
 
+//Log to console
 void Episode::print(){
    cout << "Title: " << title << endl;
    cout << "Episode: " << episode << endl;

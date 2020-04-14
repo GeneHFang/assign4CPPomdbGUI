@@ -25,6 +25,7 @@
  * @version April 2020
  */
 
+//Default constructor
 SeriesSeason::SeriesSeason(){
     title="";
     titleAndSeason="";
@@ -36,7 +37,7 @@ SeriesSeason::SeriesSeason(){
     //episodes=null;
 }
 
-
+//Constructor from individual values
 SeriesSeason::SeriesSeason(string ptitle, string pseason, string prating, 
     string pgenre, string pimgurl, string pplot, vector<Episode> pepisodes){
     title=ptitle;
@@ -49,7 +50,7 @@ SeriesSeason::SeriesSeason(string ptitle, string pseason, string prating,
     episodes = pepisodes;
 }
 
-
+//Constructor from jsonObj
 SeriesSeason::SeriesSeason(const Json::Value& jsonObj){
     Json::Value::Members mbr = jsonObj.getMemberNames();
 
@@ -85,7 +86,7 @@ SeriesSeason::SeriesSeason(const Json::Value& jsonObj){
     titleAndSeason = title + " - Season " + season;
 }
 
-
+//Constructor from json formatted String
 SeriesSeason::SeriesSeason(string jsonString){
     Json::Reader reader;
     Json::Value jsonObj;
@@ -130,6 +131,7 @@ SeriesSeason::SeriesSeason(string jsonString){
     }
 }
 
+//Destructor
 SeriesSeason::~SeriesSeason(){
     title="";
     rating="";
@@ -140,16 +142,17 @@ SeriesSeason::~SeriesSeason(){
     //episodes = 0; 
 }
 
-
+//Convert current object to json formatted string
 string SeriesSeason::toString(){
     string ret= "{}";
 
-    Json::Value jsonLib = SeriesSeason::toJson();
+    Json::Value jsonLib;
+    jsonLib = toJson();
     ret = jsonLib.toStyledString();
     return ret;
 }
 
-
+//Convert current object to JSON value
 Json::Value SeriesSeason::toJson(){
     Json::Value jsonLib;
 
@@ -178,6 +181,7 @@ Json::Value SeriesSeason::toJson(){
 
 }
 
+//Setter
 void SeriesSeason::setValues(string ptitle, string pseason, string prating, 
     string pgenre, string pimgurl, string pplot, vector<Episode> pepisodes){
         title=ptitle;
@@ -190,9 +194,9 @@ void SeriesSeason::setValues(string ptitle, string pseason, string prating,
         episodes = pepisodes;
 }
 
-
+//Log to console
 void SeriesSeason::print(){
-    cout << SeriesSeason::toString() << endl;
+    cout << toString() << endl;
     // cout << "Title: " << title << endl;
     // cout << "Season: " << season << endl;
     // cout << "Rating: " << rating << endl;

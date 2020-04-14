@@ -28,26 +28,17 @@ void run(){
 }
 
 /**
- * Copyright (c) 2020 Tim Lindquist,
- * Software Engineering,
- * Arizona State University at the Polytechnic campus
- * <p/>
- * This program is free software; you can redistribute it and/or
- * modify it under the terms of the GNU General Public License
- * as published by the Free Software Foundation version 2
- * of the License.
- * <p/>
- * This program is distributed in the hope that it will be useful,
- * but without any warranty or fitness for a particular purpose.
- * <p/>
- * Please review the GNU General Public License at:
- * http://www.gnu.org/licenses/gpl-2.0.html
- * see also: https://www.gnu.org/licenses/gpl-faq.html
- * so you are aware of the terms and your rights with regard to this software.
- * Or, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301,USA
- * <p/>
- * Purpose: C++ FLTK client UI for Music management.
+ * Copyright (c) 2020 Tim Lindquist, Gene Li
+ *
+ * This software is the intellectual property of the author, and can not be 
+ * distributed, used, copied, or reproduced, in whole or in part, for any purpose, commercial or otherwise.
+ * The author grants the ASU Software Engineering program the right to copy, execute, and evaluate this
+ * work for the purpose of determining performance of the author in coursework,
+ * and for Software Engineering program evaluation, so long as this copyright and
+ * right-to-use statement is kept in-tact in such use.
+ * All other uses are prohibited and reserved to the author.
+ * 
+ * Purpose: Modified C++ FLTK client UI originally for Music management in past assignment.
  * This class extends the Gui component class MediaClientGui and demonstrates
  * sample control functions that respond to button clicks and menu item selects.
  * This software is meant to run on Linux and MacOS using g++.
@@ -79,10 +70,12 @@ void run(){
  * <p/>
  * Ser321 Principles of Distributed Software Systems
  * see http://pooh.poly.asu.edu/Ser321
- * @author Tim Lindquist (Tim.Lindquist@asu.edu) CIDSE - Software Engineering,
+ * @author Tim Lindquist (Tim.Lindquist@asu.edu) 
+ *         Gene H Li ghli1@asu.edu
+ *                        CIDSE - Software Engineering,
  *                       IAFSE, ASU at the Polytechnic campus
  * @file    samplemain.cpp
- * @date    January, 2020
+ * @date    April 2020
  **/
 class MediaClient : public MediaClientGui {
 
@@ -93,6 +86,7 @@ public:
 
    std::thread * playThread;
    MediaLibrary * library;
+   MediaLibrary * searchLibrary;
 
 /** ClickedX is one of the callbacks for GUI controls.
     * Callbacks need to be static functions. But, static functions
@@ -178,7 +172,7 @@ public:
       case     FL_TREE_REASON_CLOSED: {aStr = "closed"; break;}
       case   FL_TREE_REASON_SELECTED: {
          aStr = "selected";
-         MediaDescription md;
+         SeriesSeason md;
          if(library){
             cout << "trying to get: " << item->label() << endl;
             md = library->get(aTitle);
@@ -186,11 +180,11 @@ public:
             cout << "library entry not found" << endl;
             break;
          }
-         cout << "media: "<< md.title << " " << md.seriesSeason << " "
-              << md.rating << " " << md.genre << " " << md.imageURL
+         cout << "media: "<< md.titleAndSeason << " " << md.title << " "
+              << md.rating << " " << md.genre << " " << md.plot << " " << md.imageURL
               << endl;
          episodeInput->value(md.title.c_str());
-         seriesSeasonInput->value(md.seriesSeason.c_str());
+         seriesSeasonInput->value(md.titleAndSeason.c_str());
          ratingInput->value(md.rating.c_str());
          genreInput->value(md.genre.c_str());
          break;
@@ -215,9 +209,11 @@ public:
       cout << "Selected Menu Path: " << selectPath << endl;
       // Handle menu selections
       if(selectPath.compare("File/Save")==0){
-         bool restSave = library->toJsonFile("series.json");
+         bool restSave = library->toJsonFile("seriesTest.json");
          cout << "Save not implemented" << endl;
       }else if(selectPath.compare("File/Restore")==0){
+         //Restore tree from seriesTest
+
          cout << "Restore not implemented" << endl;
       }else if(selectPath.compare("File/Tree Refresh")==0){
          buildTree();
