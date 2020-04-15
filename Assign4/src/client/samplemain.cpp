@@ -191,10 +191,10 @@ public:
          o->seriesSeasonInput->value(s.titleAndSeason.c_str());
          o->genreInput->value(genre.c_str());
          o->ratingInput->value(overallRating.c_str());
+
          o->summaryMLI->value(plot.c_str());
          o->summaryMLI->wrap(1);
          o->summaryMLI->readonly(1);
-
          delete o->searchLibrary; 
          o->searchLibrary = new MediaLibrary();
          o->searchLibrary->addToLibrary(s);
@@ -385,6 +385,8 @@ public:
               << " " << md.genre << endl;
       }
       cout << endl;
+      Fl_JPEG_Image * img = new Fl_JPEG_Image("temp.jpg");
+      box->image(img);
       tree->redraw();
    }
 
