@@ -195,7 +195,6 @@ public:
          o->summaryMLI->value(plot.c_str());
          o->summaryMLI->wrap(1);
          o->summaryMLI->readonly(1);
-         delete o->searchLibrary; 
          o->searchLibrary = new MediaLibrary();
          o->searchLibrary->addToLibrary(s);
          o->searchLibrary->printMap();
