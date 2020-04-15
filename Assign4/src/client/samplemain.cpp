@@ -86,7 +86,6 @@ public:
 
    std::thread * playThread;
    MediaLibrary * library;
-   MediaLibrary * searchLibrary;
 
 /** ClickedX is one of the callbacks for GUI controls.
     * Callbacks need to be static functions. But, static functions
@@ -177,12 +176,14 @@ public:
          
 
          SeriesSeason s(title, seasonNum, overallRating, genre, poster, plot, episodes);
-         
-         o->addToLibrary(o->searchLibrary, s);
+         MediaLibrary * searchLibrary = new MediaLibrary();
+         searchLibrary->addToLibrary(s);
+         searchLibrary->printMap();
 
          o->tree->add("Test/1");
          o->tree->add("Test/1");
          o->tree->close("/Test");
+         o->buildTree(searchLibrary);
          //Debugging stuff
          /*
          s.print();
@@ -199,11 +200,6 @@ public:
       catch ( curlpp::RuntimeError & e ) {
          std::cout << e.what() << std::endl;
       }
-   }
-
-   void addToLibrary(MediaLibrary * lib, SeriesSeason s){
-      lib->addToLibrary(s);
-      lib->printMap();
    }
 
    // Static menu callback method
@@ -345,6 +341,28 @@ public:
       for(int i=0; i<result.size(); i++){
          cout << " " << result[i];
          SeriesSeason md = library->get(result[i]);
+         cout << md.title << " " << md.titleAndSeason << " " << md.rating
+              << " " << md.genre << endl;
+      }
+      cout << endl;
+      tree->redraw();
+   }
+   void buildTree(MediaLibrary m){
+      
+      std::cout << "before vector of results is created" << std::endl;
+      vector<string> result = m->getTitles();
+      cout << "server has titles";
+      tree->clear();
+      for(int i=0; i<result.size(); i++){
+         cout << " " << result[i];
+         string root = result[i];
+         SeriesSeason md = m->get(result[i]);
+         for (int j = 0 ; j < md.episodes.size() ; j++){
+            string epTitle =  md.episodes[i].title;
+
+            tree->add(root+"/"+epTitle);
+         }
+         tree->close("/"+root);
          cout << md.title << " " << md.titleAndSeason << " " << md.rating
               << " " << md.genre << endl;
       }
