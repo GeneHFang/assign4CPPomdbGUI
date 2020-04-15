@@ -179,6 +179,8 @@ public:
          MediaLibrary * searchLibrary = new MediaLibrary();
          searchLibrary->addToLibrary(s);
          searchLibrary->printMap();
+
+         o->addToTree(searchLibrary.media);
          //Debugging stuff
          /*
          s.print();

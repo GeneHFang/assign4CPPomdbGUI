@@ -1,3 +1,4 @@
+#include "SeriesSeason.hpp"
 #include <FL/Fl.H>
 #include <FL/Fl_Window.H>
 #include <FL/Fl_Button.H>
@@ -15,6 +16,7 @@
 #include <stdio.h>
 #include <iostream>
 #include <stdlib.h>
+#include <map>
 
 using namespace std;
 
@@ -180,5 +182,9 @@ public:
 
       end();
       show();
+   }
+
+   addToTree(map<string, SeriesSeason> lib ){
+      cout << "test!" << endl;
    }
 };
