@@ -178,6 +178,9 @@ public:
 
          SeriesSeason s(title, seasonNum, overallRating, genre, poster, plot, episodes);
          s.print();
+         SeriesSeason test(s.toString());
+         std::cout << "Parse back into obj version : " << std::endl; 
+         test.print();
          std::cout << "Series :"<< seriesString << std::endl;
          
          std::cout << "Season : "<< seasonString << std::endl;
