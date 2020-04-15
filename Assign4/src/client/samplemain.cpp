@@ -386,6 +386,8 @@ public:
       }
       cout << endl;
       Fl_JPEG_Image * img = new Fl_JPEG_Image("temp.jpg");
+      delete png;
+      box->clear();
       box->image(img);
       box->redraw();
       box->show();
