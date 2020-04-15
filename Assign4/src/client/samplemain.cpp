@@ -264,9 +264,9 @@ public:
             }
             else{
                std::string parentLabel = item->parent()->label();
-               md = library->get(item->label());
+               md = library->get(parentLabel);
                if (md.season==-1) {
-                  md = searchLibrary->get(item->label());
+                  md = searchLibrary->get(parentLabel);
                }
                for ( int i = 0 ; i < md.episodes.size(); i++) {
                   std::cout << item->label() << endl;
