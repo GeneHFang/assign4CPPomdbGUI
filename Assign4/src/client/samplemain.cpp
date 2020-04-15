@@ -381,7 +381,7 @@ public:
       
       std::cout << "before vector of results is created" << std::endl;
       vector<string> result = library->getTitles();
-      if (result.size() > 1) {
+      if (result.size() >= 1) {
          cout << "server has titles";
          tree->clear();
          for(int i=0; i<result.size(); i++){
@@ -409,7 +409,7 @@ public:
       
       std::cout << "before vector of results is created" << std::endl;
       vector<string> result = m->getTitles();
-       if (result.size() > 1) {
+       if (result.size() >= 1) {
          cout << "server has titles";
          tree->clear();
          for(int i=0; i<result.size(); i++){
