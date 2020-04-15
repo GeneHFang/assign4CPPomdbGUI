@@ -111,7 +111,7 @@ string Episode::toString(){
     Json::Value jsonObj;
     string ret = "{}";
     jsonObj = toJson();
-    ret = jsonObj.toStyledString();
+    ret = jsonObj.asString();
     return ret;
 }
 
