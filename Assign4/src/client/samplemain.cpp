@@ -203,7 +203,7 @@ public:
 
    void addToLibrary(MediaLibrary* lib, SeriesSeasons s){
       lib->addToLibrary(s);
-      lib->print();
+      lib->printMap();
    }
 
    // Static menu callback method
