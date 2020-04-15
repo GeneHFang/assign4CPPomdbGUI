@@ -177,7 +177,7 @@ Json::Value SeriesSeason::toJson(){
    // string jsonEpisodes = "{\"Episodes\":[";
     
     for(int i = 0 ; i < episodes.size() ; i++ ){
-        epsArr.append(episodes[i].toString());
+        epsArr.append(episodes[i].toJson());
         // if (i = episodes.size()-1) {
         //     jsonEpisodes+=(episodes[i].toString()+"]}");
         // }
