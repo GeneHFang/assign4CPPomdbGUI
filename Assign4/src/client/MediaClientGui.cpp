@@ -171,7 +171,7 @@ public:
       ratingInput->value("");
       ratingInput->readonly(1);
 
-      box = new Fl_Box(350,180,320-20,400);
+      box = new Fl_Box(350,150,320-20,400);
       png = new Fl_JPEG_Image("temp.jpg");
       box->image(png);
 
