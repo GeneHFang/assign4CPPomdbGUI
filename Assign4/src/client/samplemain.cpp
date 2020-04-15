@@ -178,7 +178,7 @@ public:
 
          SeriesSeason s(title, seasonNum, overallRating, genre, poster, plot, episodes);
          
-         o->addToLibrary(o->searchLibrary, s);
+         addToLibrary(o->searchLibrary, s);
 
          o->tree->add("Test/1");
          o->tree->add("Test/1");
