@@ -390,6 +390,7 @@ public:
       box = new Fl_Box(350,180,320-20,320-20);
       png = new Fl_JPEG_Image("temp.jpg");
       box->image(png);
+      box->redraw();
       tree->redraw();
    }
 
