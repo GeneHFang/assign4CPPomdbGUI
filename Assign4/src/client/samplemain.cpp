@@ -334,7 +334,7 @@ public:
          // cout << "Save not implemented" << endl;
       }else if(selectPath.compare("File/Restore")==0){
          //Restore tree from seriesTest
-         library->initLibraryFromJsonFile("seriesTest.json")
+         library->initLibraryFromJsonFile("seriesTest.json");
          // cout << "Restore not implemented" << endl;
       }else if(selectPath.compare("File/Tree Refresh")==0){
          buildTree();
