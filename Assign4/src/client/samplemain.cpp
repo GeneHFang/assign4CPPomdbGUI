@@ -183,6 +183,7 @@ public:
          o->tree->add("Test/1");
          o->tree->add("Test/1");
          o->tree->close("/Test");
+         buildTree();
          //Debugging stuff
          /*
          s.print();
