@@ -177,6 +177,17 @@ public:
          
 
          SeriesSeason s(title, seasonNum, overallRating, genre, poster, plot, episodes);
+         
+         
+         o->seriesSeasonInput->label(s.titleAndSeason.c_str());
+         o->genreInput->label(genre.c_str());
+         o->ratingInput->label(overallRating.c_str());
+         o->png = new FL_PNG_Image(poster.c_str());
+         o->box->image(png);
+         o->summaryMLI = new Fl_Multiline_Input(665,180,300,300,plot.c_str());
+         o->summaryMLI->wrap(1);
+         o->summaryMLI->readonly(1);
+
          delete o->searchLibrary; 
          o->searchLibrary = new MediaLibrary();
          o->searchLibrary->addToLibrary(s);
