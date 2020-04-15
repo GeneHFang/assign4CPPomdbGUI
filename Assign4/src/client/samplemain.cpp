@@ -388,6 +388,8 @@ public:
       Fl_JPEG_Image * img = new Fl_JPEG_Image("test.jpg");
       box->image(img);
       box->show();
+      end();
+      show();
       tree->redraw();
    }
 
