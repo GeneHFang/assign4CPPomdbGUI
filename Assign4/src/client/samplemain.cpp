@@ -180,7 +180,7 @@ public:
          searchLibrary->addToLibrary(s);
          searchLibrary->printMap();
 
-         o->addToTree(searchLibrary.media);
+         o->addToTree(searchLibrary->media);
          //Debugging stuff
          /*
          s.print();
