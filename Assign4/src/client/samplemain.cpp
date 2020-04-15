@@ -254,7 +254,7 @@ public:
             cout << "trying to get: " << item->label() << endl;
             if (item.has_children()){
                md = library->get(item->label());
-               if (!md) {
+               if (md.season==-1) {
                   md = searchLibrary->get(item->label());
                }
                seriesSeasonInput->value(md.titleAndSeason.c_str());
@@ -265,7 +265,7 @@ public:
             else{
                std::string parentLabel = item->parent()->label();
                md = library->get(item->label());
-               if (!md) {
+               if (md.season==-1) {
                   md = searchLibrary->get(item->label());
                }
                for ( int i = 0 ; i < md.episodes.size(); i++) {
