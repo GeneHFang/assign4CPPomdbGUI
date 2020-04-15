@@ -385,8 +385,9 @@ public:
               << " " << md.genre << endl;
       }
       cout << endl;
-      Fl_JPEG_Image * img = new Fl_JPEG_Image("temp.jpg");
-      box->image(img);
+      delete png;
+      png = new Fl_JPEG_Image("temp.jpg");
+      box->image(png);
       tree->redraw();
    }
 
