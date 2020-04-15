@@ -27,7 +27,6 @@
 
 //Default constructor
 Episode::Episode(){
-    cout << "Episode default constructor" << endl;
     title="";
     episode=-1;
     rating="";
@@ -35,7 +34,6 @@ Episode::Episode(){
 
 //Constructor from individual values
 Episode::Episode(string ptitle, int pepisode, string prating){
-    cout << "Episode ind constructor" << endl;
     title = ptitle;
     episode = pepisode;
     rating = prating;
@@ -43,7 +41,6 @@ Episode::Episode(string ptitle, int pepisode, string prating){
 
 //Constructor from JSON value
 Episode::Episode(const Json::Value& jsonObj){
-    cout << "Episode json constructor" << endl;
     Json::Reader reader;
     Json::Value root;
 
@@ -72,7 +69,6 @@ Episode::Episode(const Json::Value& jsonObj){
 
 //Constructor from json formatted string
 Episode::Episode(string jsonString){
-    cout << "Episode string constructor" << endl;
     Json::Reader reader;
     Json::Value jsonObj;
 
@@ -98,7 +94,6 @@ Episode::Episode(string jsonString){
 
 //Destrcutor
 Episode::~Episode(){
-    cout << "Episode destructor" << endl;
     title="";
     episode=-1;
     rating="";
@@ -106,8 +101,6 @@ Episode::~Episode(){
 
 //Convert current object to json formatted string
 string Episode::toString(){
-    
-    cout << "Episode to json string" << endl;
     Json::Value jsonObj;
     string ret = "{}";
     jsonObj = toJson();
@@ -120,8 +113,6 @@ string Episode::toString(){
 
 //Convert current object to json value
 Json::Value Episode::toJson(){
-    
-    cout << "Episode to json" << endl;
     Json::Value jsonLib;
     jsonLib["Title"] = title;
     jsonLib["Episode"] = episode;
@@ -131,8 +122,6 @@ Json::Value Episode::toJson(){
 
 //Setter
 void Episode::setValues(string ptitle, int pepisode, string prating){
-    
-    cout << "Episode setter" << endl;
     title = ptitle;
     episode = pepisode;
     rating = prating;
@@ -140,8 +129,6 @@ void Episode::setValues(string ptitle, int pepisode, string prating){
 
 //Log to console
 void Episode::print(){
-
-    cout << "Episode printer" << endl;
    cout << "Title: " << title << endl;
    cout << "Episode: " << episode << endl;
    cout << "Rating: " << rating << endl;

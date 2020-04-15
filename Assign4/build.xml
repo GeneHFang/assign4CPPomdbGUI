@@ -1,4 +1,4 @@
-<project name="Ser321 Assign4 C++ Message GUI, sample build file."
+<project name="Ser321 Assign4 C++ Message GUI build file based on sample build file."
          default="targets" basedir="."
          xmlns="antlib:org.apache.tools.ant">
    <taskdef resource="cpptasks.tasks"/>

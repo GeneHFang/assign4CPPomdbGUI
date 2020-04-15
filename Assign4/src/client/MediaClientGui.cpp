@@ -49,7 +49,7 @@ class MediaClientGui : public Fl_Window {
 public:
 
    Fl_Box * box;
-   Fl_JPEG_Image * png;
+   Fl_JPEG_Image * png; //changes PNG to JPEG
 
    /**
     * tree is the Fl_Tree object that occupies the left side of the window.

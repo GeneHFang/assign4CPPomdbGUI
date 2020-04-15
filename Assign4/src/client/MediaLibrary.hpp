@@ -30,20 +30,40 @@ using namespace std;
  */
 class MediaLibrary {
 public:
+   //attributes
    std::map<std::string, SeriesSeason> media;
 
-public:
+   //Constructor/Destructor
    MediaLibrary();
    ~MediaLibrary();
 
+   //Appends a map of seriesSeasons to current library
    void addLibrary(std::map<std::string, SeriesSeason> media);
-   Json::Value getJson();
+
+   //Appends a single SeriesSeason instance to current library (uses C++17 syntax)
    bool addToLibrary(SeriesSeason ss);
+
+   //Removes a single SeriesSeason instance based on key
    bool removeFromLibrary(std::string key);
+
+   //Creates a Json object from library
+   Json::Value getJson();
+   
+   //Clears library and reinitializes from json filename
    bool initLibraryFromJsonFile(string jsonFileName);
+
+   //Creates a json file based on library
    bool toJsonFile(string jsonFileName);
+   
+   //debugging use only, prints json formatted string to console
    void printMap();
-   string serviceInfo();
+
+   //Get a single instance of SeriesSeason using a key
    SeriesSeason get(string aTitle);
+   
+   //Gets string vector of all keys in library
    std::vector<string> getTitles();
+   
+   //unimplemented
+   string serviceInfo();
 };

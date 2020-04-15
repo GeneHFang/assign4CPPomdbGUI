@@ -105,7 +105,7 @@ public:
     * Static search button callback method.
     */
    static void SearchCallbackS(Fl_Widget*w, void*data) {
-      std::cout << "before MediaClient is created" << std::endl;
+      // std::cout << "before MediaClient is created" << std::endl;
       MediaClient *o = (MediaClient*)data;
       cout << "Search Clicked. You asked for a OMDb search of Season: " <<
          o->seasonSrchInput->value() << " Series: " <<
@@ -159,9 +159,9 @@ public:
          bool parseSeasonSuccess = reader.parse(seasonString, seasonObj, false);
          bool parseSeriesSuccess = reader.parse(seriesString, seriesObj, false);
 
+         //Create SeriesSeason object and Episode vector from json info
          std::string title, overallRating, genre, poster, plot;
          int seasonNum = std::stoi(o->seasonSrchInput->value());
-
          std::vector<Episode> episodes;
 
          auto jsonEps = seasonObj["Episodes"];
@@ -176,6 +176,7 @@ public:
          poster = seriesObj["Poster"].asString();
          plot = seriesObj["Plot"].asString();
          
+         //Download image from search result
          std::ofstream file;
          file.open("temp.jpg");
          curlpp::Easy imageRequest;
@@ -184,14 +185,13 @@ public:
          imageRequest.perform();
          file.close();
          
-
+         //value constructor
          SeriesSeason s(title, seasonNum, overallRating, genre, poster, plot, episodes);
          
-         
+         //Add info to gui and temporary library
          o->seriesSeasonInput->value(s.titleAndSeason.c_str());
          o->genreInput->value(genre.c_str());
          o->ratingInput->value(overallRating.c_str());
-
          o->summaryMLI->value(plot.c_str());
          o->summaryMLI->wrap(1);
          o->summaryMLI->readonly(1);
@@ -199,7 +199,9 @@ public:
          o->searchLibrary->addToLibrary(s);
          o->searchLibrary->printMap();
 
+         //Build tree from just search result
          o->buildTree(o->searchLibrary);
+
          //Debugging stuff
          /*
          s.print();
@@ -220,7 +222,7 @@ public:
 
    // Static menu callback method
    static void TreeCallbackS(Fl_Widget*w, void*data) {
-      std::cout << "before MediaClient is created" << std::endl;
+      // std::cout << "before MediaClient is created" << std::endl;
       MediaClient *o = (MediaClient*)data;
       o->TreeCallback(); //call the instance callback method
    }
@@ -230,7 +232,7 @@ public:
     * collapse.
     */
    void TreeCallback() {
-      std::cout << "before FLTreeItem is created" << std::endl;
+      // std::cout << "before FLTreeItem is created" << std::endl;
       // Find item that was clicked
       Fl_Tree_Item *item = (Fl_Tree_Item*)tree->item_clicked();
       cout << "Tree callback. Item selected: ";
@@ -251,6 +253,7 @@ public:
          SeriesSeason md;
          if(library){
             cout << "trying to get: " << item->label() << endl;
+            //If node is SeriesSeason
             if (item->has_children()){
                md = library->get(item->label());
                if (md.season==-1) {
@@ -261,7 +264,7 @@ public:
                genreInput->value(md.genre.c_str());
                summaryMLI->value(md.plot.c_str());
             }
-            else{
+            else{ //If node is Episode
                std::string parentLabel = item->parent()->label();
                md = library->get(parentLabel);
                if (md.season==-1) {
@@ -296,7 +299,7 @@ public:
       cout << "Callback reason: " << aStr.c_str() << endl;
    }
    
-   //reload Image
+   //reload Image from poster url
    void renderImage(std::string imageURL){
       std::ofstream file;
       file.open("temp.jpg");
@@ -329,27 +332,29 @@ public:
       string selectPath(picked);
       // cout << "Selected Menu Path: " << selectPath << endl;
       // Handle menu selections
-      if(selectPath.compare("File/Save")==0){
+      if(selectPath.compare("File/Save")==0){ //save library to seriesTest.json 
          bool restSave = library->toJsonFile("seriesTest.json");
          // cout << "Save not implemented" << endl;
-      }else if(selectPath.compare("File/Restore")==0){
+      }else if(selectPath.compare("File/Restore")==0){ //load library from seriesTest.json
          //Restore tree from seriesTest
          library->initLibraryFromJsonFile("seriesTest.json");
+         buildTree();
          // cout << "Restore not implemented" << endl;
-      }else if(selectPath.compare("File/Tree Refresh")==0){
+      }else if(selectPath.compare("File/Tree Refresh")==0){ //largely unneeded, as adding and removing both refresh tree
          buildTree();
       }else if(selectPath.compare("File/Exit")==0){
          if(playThread && playThread->joinable()){
             playThread->join();
          }
          exit(0);
-      }else if(selectPath.compare("Series-Season/Add")==0){
+      }else if(selectPath.compare("Series-Season/Add")==0){ //add current search result to library
          library->addLibrary(searchLibrary->media);
          buildTree();
          // cout << "Add not implemented" << endl;
-      }else if(selectPath.compare("Series-Season/Remove")==0){
+      }else if(selectPath.compare("Series-Season/Remove")==0){ //remove current search result from library
          string key = searchLibrary->media.begin()->second.titleAndSeason;
          library->removeFromLibrary(key);
+         buildTree();
          // cout << "Remove not implemented" << endl;
       }
    }
@@ -381,7 +386,7 @@ public:
     */
    std::string exec(const char* cmd) {
       
-      std::cout << "before File is created" << std::endl;
+      // std::cout << "before File is created" << std::endl;
       FILE* pipe = popen(cmd, "r");
       if (!pipe) return "ERROR";
       char buffer[128];
@@ -396,7 +401,7 @@ public:
 
    void buildTree(){
       
-      std::cout << "before vector of results is created" << std::endl;
+      // std::cout << "before vector of results is created" << std::endl;
       vector<string> result = library->getTitles();
          cout << "server has titles";
          tree->clear();
@@ -422,7 +427,7 @@ public:
    }
    void buildTree(MediaLibrary* m){
       
-      std::cout << "before vector of results is created" << std::endl;
+      // std::cout << "before vector of results is created" << std::endl;
       vector<string> result = m->getTitles();
          cout << "server has titles";
          tree->clear();
@@ -437,8 +442,6 @@ public:
             }
             string close = "/"+root;
             tree->close(close.c_str());
-            cout << md.title << " " << md.titleAndSeason << " " << md.rating
-               << " " << md.genre << endl;
          }
          Fl_JPEG_Image * img = new Fl_JPEG_Image("temp.jpg");
          box->image(img);
@@ -450,24 +453,21 @@ public:
    }
 
    MediaClient(const char * name = "Tim", const char * key = "myKey") : MediaClientGui(name) {
-      
-      std::cout << "before callbacks are set" << std::endl;
       searchButt->callback(SearchCallbackS, (void*)this);
-      std::cout << "after search button set" << std::endl;
       menubar->callback(Menu_ClickedS, (void*)this);
-      std::cout << "after menu bar set" << std::endl;
       tree->callback(TreeCallbackS, (void*)this);
-      std::cout << "after tree callback set" << std::endl;
       callback(ClickedX);
-      std::cout << "before Library is created" << std::endl;
       omdbkey = key;
       userId = "Tim.Lindquist";
+
+      //Initial library from seriesTest.json
       library = new MediaLibrary();
       library->initLibraryFromJsonFile("seriesTest.json");
+
+      //Initial search result library is empty
       searchLibrary = new MediaLibrary();
-      std::cout << "before tree is built" << std::endl;
+      
       buildTree();
-      std::cout << "after tree is built" << std::endl;
    }
 };
 

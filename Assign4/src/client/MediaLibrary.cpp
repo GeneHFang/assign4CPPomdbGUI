@@ -32,20 +32,23 @@ using namespace std;
  * @version April 2020
  */
 
+//Constructor
 MediaLibrary::MediaLibrary(){
    initLibraryFromJsonFile("seriesTest.json");
 }
 
-
+//Destructor
 MediaLibrary::~MediaLibrary() {
    media.clear();
 }
 
+//Appends a map of seriesSeasons to current library
 void MediaLibrary::addLibrary(std::map<std::string, SeriesSeason> lib)
 {
    media.insert(lib.begin(),lib.end());
 }
 
+//Appends a single SeriesSeason instance to current library (uses C++17 syntax)
 bool MediaLibrary::addToLibrary(SeriesSeason ssObj){
    bool ret; 
 
@@ -55,6 +58,7 @@ bool MediaLibrary::addToLibrary(SeriesSeason ssObj){
    return ret;
 }
 
+//Removes a single SeriesSeason instance based on key
 bool MediaLibrary::removeFromLibrary(std::string key){
    bool ret = false;
 
@@ -63,6 +67,7 @@ bool MediaLibrary::removeFromLibrary(std::string key){
    return ret;
 }
 
+//Clears library and reinitializes from json filename
 bool MediaLibrary::initLibraryFromJsonFile(string jsonFileName){
    media.clear();
    bool ret = false;
@@ -85,6 +90,7 @@ bool MediaLibrary::initLibraryFromJsonFile(string jsonFileName){
    return ret;
 }
 
+//Creates a Json object from library
 Json::Value MediaLibrary::getJson(){
    Json::Value jsonLib;
    for(std::map<string,SeriesSeason>::iterator i = media.begin();
@@ -98,6 +104,7 @@ Json::Value MediaLibrary::getJson(){
    return jsonLib;
 }
 
+//Creates a json file based on library
 bool MediaLibrary::toJsonFile(string jsonFileName){
    bool ret = false;
    Json::Value jsonLib = getJson();
@@ -107,15 +114,18 @@ bool MediaLibrary::toJsonFile(string jsonFileName){
    return true;
 }
 
+//debugging use only, prints json formatted string to console
 void MediaLibrary::printMap(){
    std::cout << getJson().toStyledString() << std::endl;
 }
 
+//Get a single instance of SeriesSeason using a key
 SeriesSeason MediaLibrary::get(string aTitle){
    SeriesSeason aMedia = media[aTitle];
    return aMedia;
 }
 
+//Gets string vector of all keys in library
 vector<string> MediaLibrary::getTitles(){
    vector<string> myVec;
    for(map<string,SeriesSeason>::iterator it = media.begin();
