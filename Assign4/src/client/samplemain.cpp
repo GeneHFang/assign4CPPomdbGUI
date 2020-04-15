@@ -359,10 +359,11 @@ public:
          SeriesSeason md = m->get(result[i]);
          for (int j = 0 ; j < md.episodes.size() ; j++){
             string epTitle =  md.episodes[i].title;
-
-            tree->add(root+"/"+epTitle);
+            string add = root+"/"+epTitle; 
+            tree->add(add);
          }
-         tree->close("/"+root);
+         string close = "/"+root;
+         tree->close(close);
          cout << md.title << " " << md.titleAndSeason << " " << md.rating
               << " " << md.genre << endl;
       }
