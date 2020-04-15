@@ -252,7 +252,7 @@ public:
          SeriesSeason md;
          if(library){
             cout << "trying to get: " << item->label() << endl;
-            if (item.has_children()){
+            if (item->has_children()){
                md = library->get(item->label());
                if (md.season==-1) {
                   md = searchLibrary->get(item->label());
