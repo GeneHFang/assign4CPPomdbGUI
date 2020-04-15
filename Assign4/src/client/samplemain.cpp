@@ -177,8 +177,8 @@ public:
          
 
          SeriesSeason s(title, seasonNum, overallRating, genre, poster, plot, episodes);
-         delete searchLibrary; 
-         searchLibrary = new MediaLibrary();
+         delete o->searchLibrary; 
+         o->searchLibrary = new MediaLibrary();
          o->searchLibrary->addToLibrary(s);
          o->searchLibrary->printMap();
 
