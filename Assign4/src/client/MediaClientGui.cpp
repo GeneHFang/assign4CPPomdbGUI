@@ -49,7 +49,7 @@ class MediaClientGui : public Fl_Window {
 public:
 
    Fl_Box * box;
-   Fl_PNG_Image * png;
+   Fl_JPEG_Image * png;
 
    /**
     * tree is the Fl_Tree object that occupies the left side of the window.
@@ -172,7 +172,7 @@ public:
       ratingInput->readonly(1);
 
       box = new Fl_Box(350,180,320-20,320-20);
-      png = new Fl_PNG_Image("default.png");
+      png = new Fl_JPEG_Image("");
       box->image(png);
 
       summaryMLI = new Fl_Multiline_Input(665,180,300,300,0);

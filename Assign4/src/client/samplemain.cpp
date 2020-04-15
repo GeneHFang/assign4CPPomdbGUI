@@ -175,6 +175,14 @@ public:
          poster = seriesObj["Poster"].asString();
          plot = seriesObj["Plot"].asString();
          
+         std::ofstream file;
+         file.open("temp.jpg");
+         curlpp::Easy imageRequest;
+         imageRequest.setOpt(new curlpp::options::WriteStream(&file));
+         imageRequest.setOpt(new curlpp::options::Url(poster.c_str()));
+         imageRequest.perform();
+         file.close();
+         
 
          SeriesSeason s(title, seasonNum, overallRating, genre, poster, plot, episodes);
          
@@ -182,7 +190,7 @@ public:
          o->seriesSeasonInput->value(s.titleAndSeason.c_str());
          o->genreInput->value(genre.c_str());
          o->ratingInput->value(overallRating.c_str());
-         o->png = new Fl_PNG_Image(poster.c_str());
+         o->png = new Fl_JPEG_Image("temp.jpg");
          o->box->image(o->png);
          o->summaryMLI->value(plot.c_str());
          o->summaryMLI->wrap(1);
