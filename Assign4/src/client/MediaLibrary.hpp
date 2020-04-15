@@ -39,7 +39,7 @@ public:
 
    Json::Value getJson();
    bool addToLibrary(SeriesSeason ss);
-   bool MediaLibrary::removeFromLibrary(std::string key);
+   bool removeFromLibrary(std::string key);
    bool initLibraryFromJsonFile(string jsonFileName);
    bool toJsonFile(string jsonFileName);
    void printMap();
