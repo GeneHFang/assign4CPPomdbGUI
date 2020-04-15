@@ -168,7 +168,7 @@ public:
             Episode * ep = new Episode(jsonEps[i]);
             episodes.push_back(*ep);
          }
-
+         std::cout << "size of vector is : " << episodes.size() << std::endl;
          title = seriesObj["Title"].asString();
          overallRating = seriesObj["imdbRating"].asString();
          genre = seriesObj["Genre"].asString();
