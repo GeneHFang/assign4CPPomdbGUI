@@ -94,7 +94,7 @@ bool MediaLibrary::toJsonFile(string jsonFileName){
 }
 
 void MediaLibrary::printMap(){
-   std::cout << getJson().asStyleString() << std::endl;
+   std::cout << getJson().toStyledString() << std::endl;
 }
 
 SeriesSeason MediaLibrary::get(string aTitle){
