@@ -16,7 +16,6 @@
 #include <stdio.h>
 #include <iostream>
 #include <stdlib.h>
-#include <map>
 
 using namespace std;
 
@@ -47,7 +46,7 @@ using namespace std;
  * @date    April 2020
  **/
 class MediaClientGui : public Fl_Window {
-protected:
+public:
 
    Fl_Box * box;
    Fl_PNG_Image * png;
@@ -182,9 +181,5 @@ public:
 
       end();
       show();
-   }
-
-   void addToTree(map<string, SeriesSeason> lib ){
-      cout << "test!" << endl;
    }
 };
