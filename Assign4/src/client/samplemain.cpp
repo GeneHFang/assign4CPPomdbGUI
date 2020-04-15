@@ -182,7 +182,7 @@ public:
          o->seriesSeasonInput->label(s.titleAndSeason.c_str());
          o->genreInput->label(genre.c_str());
          o->ratingInput->label(overallRating.c_str());
-         o->png = new FL_PNG_Image(poster.c_str());
+         o->png = new Fl_PNG_Image(poster.c_str());
          o->box->image(o->png);
          o->summaryMLI = new Fl_Multiline_Input(665,180,300,300,plot.c_str());
          o->summaryMLI->wrap(1);
