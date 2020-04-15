@@ -123,6 +123,8 @@ public:
                urlEncodedQuery += query.at(i);
             }
          }
+
+
          /*
          * Series and Season API call
          */
@@ -135,6 +137,7 @@ public:
          myRequest.setOpt(new curlpp::options::Url(seasonSearchUrl.c_str()));
          myRequest.perform();
          std::string seasonString = os.str();
+
          
          /*
          * Series only API call
@@ -149,8 +152,31 @@ public:
          myRequest2.perform();
          std::string seriesString = os2.str();
          
+         //Parse both calls
+         Json::Reader reader;
+         Json::Value seasonObj, seriesObj;
+         bool parseSeasonSuccess = reader.parse(seasonString, seasonObj, false);
+         bool parseSeriesSuccess = reader.parse(seriesString, seriesObj, false);
 
-         SeriesSeason s(seriesString);
+         std::string title, overallRating, genre, poster, plot, libKey;
+         int seasonNum = o->seasonSrchInput->value();
+
+         std::vector<Episode> episodes;
+
+         auto jsonEps = seasonObj["Episodes"];
+         for (Json::Value::ArrayIndex i = 0 ; i != jsonEps.size() ; i++){
+            Episode ep(jsonEps[i]);
+            episodes.push_back(ep);
+         }
+
+         title = seriesObj["Title"];
+         overallRating = seriesObj["imdbRating"];
+         genre = seriesObj["Genre"];
+         poster = seriesObj["Poster"];
+         plot = seriesObj["Plot"];
+         
+
+         SeriesSeason s(title, seasonNum, overallRating, genre, poster, plot, episodes);
          s.print();
          std::cout << "Series :"<< seriesString << std::endl;
          

@@ -42,7 +42,7 @@ class SeriesSeason {
 
         //constructors/destructor
         SeriesSeason();
-        SeriesSeason(string title, string season, string rating, string genre, string imgurl, string plot, vector<Episode> episodes);
+        SeriesSeason(string title, int season, string rating, string genre, string imgurl, string plot, vector<Episode> episodes);
         SeriesSeason(const Json::Value& jsonObj);
         SeriesSeason(string jsonString);
         ~SeriesSeason();

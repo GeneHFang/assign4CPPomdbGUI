@@ -40,12 +40,12 @@ SeriesSeason::SeriesSeason(){
 }
 
 //Constructor from individual values
-SeriesSeason::SeriesSeason(string ptitle, string pseason, string prating, 
+SeriesSeason::SeriesSeason(string ptitle, int pseason, string prating, 
     string pgenre, string pimgurl, string pplot, vector<Episode> pepisodes){
     cout << "SS values constructor" << endl;
     title=ptitle;
     titleAndSeason=ptitle+" - Season "+pseason;
-    season = stoi(pseason);
+    season = pseason;
     rating = prating;
     genre = pgenre;
     imgURL = pimgurl;
