@@ -178,13 +178,13 @@ public:
 
          SeriesSeason s(title, seasonNum, overallRating, genre, poster, plot, episodes);
         
-         searchLibrary->addToLibrary(s);
-         searchLibrary->printMap();
+         o->searchLibrary->addToLibrary(s);
+         o->searchLibrary->printMap();
 
          o->tree->add("Test/1");
          o->tree->add("Test/1");
          o->tree->close("/Test");
-         o->buildTree(searchLibrary);
+         o->buildTree(o->searchLibrary);
          //Debugging stuff
          /*
          s.print();
