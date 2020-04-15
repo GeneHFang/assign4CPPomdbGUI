@@ -111,8 +111,10 @@ string Episode::toString(){
     Json::Value jsonObj;
     string ret = "{}";
     jsonObj = toJson();
-    Json::FastWriter fw;
-    ret = fw.write(jsonObj);
+    cout << "json to string : " << jsonObj.toStyledString() << endl;
+    ret = jsonObj.toStyledString();
+    cout << "ret to string : " << ret << endl;
+    
     return ret;
 }
 
