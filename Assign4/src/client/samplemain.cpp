@@ -320,7 +320,7 @@ public:
 
          cout << "Restore not implemented" << endl;
       }else if(selectPath.compare("File/Tree Refresh")==0){
-         buildTree(library);
+         buildTree();
       }else if(selectPath.compare("File/Exit")==0){
          if(playThread && playThread->joinable()){
             playThread->join();
@@ -328,7 +328,7 @@ public:
          exit(0);
       }else if(selectPath.compare("Series-Season/Add")==0){
          library = new MediaLibrary(searchLibrary->media);
-         buildTree(library);
+         buildTree();
          // cout << "Add not implemented" << endl;
       }else if(selectPath.compare("Series-Season/Remove")==0){
          string key = searchLibrary->media.begin()->second.titleAndSeason;
@@ -381,30 +381,29 @@ public:
       
       std::cout << "before vector of results is created" << std::endl;
       vector<string> result = library->getTitles();
-      cout << "server has titles";
-      tree->clear();
-      for(int i=0; i<result.size(); i++){
-         cout << " " << result[i];
-         string root = result[i];
-         SeriesSeason md = library->get(result[i]);
-         for (int j = 0 ; j < md.episodes.size() ; j++){
-            string epTitle =  md.episodes[j].title;
-            string add = root+"/"+epTitle; 
-            tree->add(add.c_str());
+      if (result.size() > 1) {
+         cout << "server has titles";
+         tree->clear();
+         for(int i=0; i<result.size(); i++){
+            cout << " " << result[i];
+            string root = result[i];
+            SeriesSeason md = library->get(result[i]);
+            for (int j = 0 ; j < md.episodes.size() ; j++){
+               string epTitle =  md.episodes[j].title;
+               string add = root+"/"+epTitle; 
+               tree->add(add.c_str());
+            }
+            string close = "/"+root;
+            tree->close(close.c_str());
          }
-         string close = "/"+root;
-         tree->close(close.c_str());
-         cout << md.title << " " << md.titleAndSeason << " " << md.rating
-              << " " << md.genre << endl;
+         Fl_JPEG_Image * img = new Fl_JPEG_Image("temp.jpg");
+         box->image(img);
+         box->redraw();
+         box->show();
+         end();
+         show();
+         tree->redraw();
       }
-      cout << endl;
-      Fl_JPEG_Image * img = new Fl_JPEG_Image("temp.jpg");
-      box->image(img);
-      box->redraw();
-      box->show();
-      end();
-      show();
-      tree->redraw();
    }
    void buildTree(MediaLibrary* m){
       
@@ -450,6 +449,7 @@ public:
       omdbkey = key;
       userId = "Tim.Lindquist";
       library = new MediaLibrary();
+      library->initLibraryFromJsonFile("seriesTest.json");
       searchLibrary = new MediaLibrary();
       std::cout << "before tree is built" << std::endl;
       buildTree();
