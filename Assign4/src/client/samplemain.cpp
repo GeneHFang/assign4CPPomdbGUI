@@ -347,7 +347,7 @@ public:
       cout << endl;
       tree->redraw();
    }
-   void buildTree(MediaLibrary m){
+   void buildTree(MediaLibrary* m){
       
       std::cout << "before vector of results is created" << std::endl;
       vector<string> result = m->getTitles();
