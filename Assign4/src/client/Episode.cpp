@@ -60,7 +60,7 @@ Episode::Episode(const Json::Value& jsonObj){
             title = jsonM.asString();
             }else if(*i=="Episode"){
             episode = stoi(jsonM.asString());
-            }else if(*i=="rating"){
+            }else if(*i=="imdbRating"){
             rating = jsonM.asString();
             }
         }
