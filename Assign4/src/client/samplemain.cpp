@@ -86,7 +86,7 @@ public:
 
    std::thread * playThread;
    MediaLibrary * library;
-   MediaLibrary * searchLibrary;
+   MediaLibrary searchLibrary;
 
 /** ClickedX is one of the callbacks for GUI controls.
     * Callbacks need to be static functions. But, static functions
@@ -177,8 +177,8 @@ public:
          
 
          SeriesSeason s(title, seasonNum, overallRating, genre, poster, plot, episodes);
-         searchLibrary->addToLibrary(s);
-         searchLibrary->printMap();
+         searchLibrary.addToLibrary(s);
+         searchLibrary.printMap();
          //Debugging stuff
          /*
          s.print();
