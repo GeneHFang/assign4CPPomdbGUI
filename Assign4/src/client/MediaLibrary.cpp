@@ -64,6 +64,7 @@ bool MediaLibrary::removeFromLibrary(std::string key){
 }
 
 bool MediaLibrary::initLibraryFromJsonFile(string jsonFileName){
+   media.clear();
    bool ret = false;
    Json::Reader reader;
    Json::Value root;
