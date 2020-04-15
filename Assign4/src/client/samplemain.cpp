@@ -288,10 +288,6 @@ public:
          cout << "media: "<< md.titleAndSeason << " " << md.title << " "
               << md.rating << " " << md.genre << " " << md.plot << " " << md.imgURL
               << endl;
-         episodeInput->value(md.title.c_str());
-         seriesSeasonInput->value(md.titleAndSeason.c_str());
-         ratingInput->value(md.rating.c_str());
-         genreInput->value(md.genre.c_str());
          break;
       }
       case FL_TREE_REASON_DESELECTED: {aStr = "deselected"; break;}
