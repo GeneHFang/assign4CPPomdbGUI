@@ -409,30 +409,32 @@ public:
       
       std::cout << "before vector of results is created" << std::endl;
       vector<string> result = m->getTitles();
-      cout << "server has titles";
-      tree->clear();
-      for(int i=0; i<result.size(); i++){
-         cout << " " << result[i];
-         string root = result[i];
-         SeriesSeason md = m->get(result[i]);
-         for (int j = 0 ; j < md.episodes.size() ; j++){
-            string epTitle =  md.episodes[j].title;
-            string add = root+"/"+epTitle; 
-            tree->add(add.c_str());
+       if (result.size() > 1) {
+         cout << "server has titles";
+         tree->clear();
+         for(int i=0; i<result.size(); i++){
+            cout << " " << result[i];
+            string root = result[i];
+            SeriesSeason md = m->get(result[i]);
+            for (int j = 0 ; j < md.episodes.size() ; j++){
+               string epTitle =  md.episodes[j].title;
+               string add = root+"/"+epTitle; 
+               tree->add(add.c_str());
+            }
+            string close = "/"+root;
+            tree->close(close.c_str());
+            cout << md.title << " " << md.titleAndSeason << " " << md.rating
+               << " " << md.genre << endl;
          }
-         string close = "/"+root;
-         tree->close(close.c_str());
-         cout << md.title << " " << md.titleAndSeason << " " << md.rating
-              << " " << md.genre << endl;
-      }
-      cout << endl;
-      Fl_JPEG_Image * img = new Fl_JPEG_Image("temp.jpg");
-      box->image(img);
-      box->redraw();
-      box->show();
-      end();
-      show();
-      tree->redraw();
+         cout << endl;
+         Fl_JPEG_Image * img = new Fl_JPEG_Image("temp.jpg");
+         box->image(img);
+         box->redraw();
+         box->show();
+         end();
+         show();
+         tree->redraw();
+       }
    }
 
    MediaClient(const char * name = "Tim", const char * key = "myKey") : MediaClientGui(name) {
