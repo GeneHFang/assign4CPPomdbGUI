@@ -326,7 +326,7 @@ public:
          }
          exit(0);
       }else if(selectPath.compare("Series-Season/Add")==0){
-         library = new MediaLibrary(searchLibrary->media);
+         library->addLibrary(searchLibrary->media);
          buildTree();
          // cout << "Add not implemented" << endl;
       }else if(selectPath.compare("Series-Season/Remove")==0){

@@ -36,15 +36,15 @@ MediaLibrary::MediaLibrary(){
    initLibraryFromJsonFile("seriesTest.json");
 }
 
-MediaLibrary::MediaLibrary(std::map<std::string, SeriesSeason> lib)
-{
-   media.insert(lib.begin(),lib.end());
-}
 
 MediaLibrary::~MediaLibrary() {
    media.clear();
 }
 
+void MediaLibrary::addLibrary(std::map<std::string, SeriesSeason> lib)
+{
+   media.insert(lib.begin(),lib.end());
+}
 
 bool MediaLibrary::addToLibrary(SeriesSeason ssObj){
    bool ret; 

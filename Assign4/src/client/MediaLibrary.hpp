@@ -34,9 +34,9 @@ public:
 
 public:
    MediaLibrary();
-   MediaLibrary(std::map<std::string, SeriesSeason> media);
    ~MediaLibrary();
 
+   void addLibrary(std::map<std::string, SeriesSeason> media);
    Json::Value getJson();
    bool addToLibrary(SeriesSeason ss);
    bool removeFromLibrary(std::string key);
