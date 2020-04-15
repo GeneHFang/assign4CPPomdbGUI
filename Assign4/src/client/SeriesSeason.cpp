@@ -172,20 +172,25 @@ Json::Value SeriesSeason::toJson(){
     jsonLib["Genre"] = genre;
     jsonLib["Plot"] = plot;
     
-    string jsonEpisodes = "{\"Episodes\":[";
+
+    Json::Value epsArr; 
+   // string jsonEpisodes = "{\"Episodes\":[";
     
     for(int i = 0 ; i < episodes.size() ; i++ ){
-        if (i = episodes.size()-1) {
-            jsonEpisodes+=(episodes[i].toString()+"]}");
-        }
-        jsonEpisodes+=(episodes[i].toString()+",");
+        epsArr.append(episodes[i].toString());
+        // if (i = episodes.size()-1) {
+        //     jsonEpisodes+=(episodes[i].toString()+"]}");
+        // }
+        // else {
+        //     jsonEpisodes+=(episodes[i].toString()+",");
+        // }
     }
 
-    Json::Reader r;
-    Json::Value epp; 
-    r.parse(jsonEpisodes, epp, false);
-    auto episodeArray = epp["Episodes"];
-    jsonLib["Episodes"] = episodeArray;
+    // Json::Reader r;
+    // Json::Value epp; 
+    // r.parse(jsonEpisodes, epp, false);
+    // auto episodeArray = epp["Episodes"];
+    jsonLib["Episodes"] = epsArr;
 
     return jsonLib;
 
