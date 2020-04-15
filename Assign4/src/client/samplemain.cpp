@@ -252,7 +252,34 @@ public:
          SeriesSeason md;
          if(library){
             cout << "trying to get: " << item->label() << endl;
-            md = library->get(aTitle);
+            if (item.has_children()){
+               md = library->get(item->label());
+               if (!md) {
+                  md = searchLibrary->get(item->label());
+               }
+               seriesSeasonInput->value(md.titleAndSeason.c_str());
+               ratingInput->value(md.rating.c_str());
+               genreInput->value(md.genre.c_str());
+               summaryMLI->value(md.plot.c_str());
+            }
+            else{
+               std::string parentLabel = item->parent()->label();
+               md = library->get(item->label());
+               if (!md) {
+                  md = searchLibrary->get(item->label());
+               }
+               for ( int i = 0 ; i < md.episodes.size(); i++) {
+                  if (parentLabel==md.episodes[i].title){
+                     seriesSeasonInput->value(md.episodes[i].title.c_str());
+                     episodeInput->value(std::to_string(md.episodes[i].episode).c_str());
+                     ratingInput->value(md.episodes[i].rating.c_str());
+                     break;
+                  }
+               }
+               genreInput->value(md.genre.c_str());
+               summaryMLI->value(md.plot.c_str());
+            }
+
          }else{
             cout << "library entry not found" << endl;
             break;
