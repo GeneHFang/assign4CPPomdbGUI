@@ -385,11 +385,8 @@ public:
               << " " << md.genre << endl;
       }
       cout << endl;
-      delete png;
-      delete box;
-      box = new Fl_Box(350,180,320-20,320-20);
-      png = new Fl_JPEG_Image("temp.jpg");
-      box->image(png);
+      Fl_JPEG_Image * img = new Fl_JPEG_Image("test.jpg");
+      box->image(img);
       box->redraw();
       tree->redraw();
    }
