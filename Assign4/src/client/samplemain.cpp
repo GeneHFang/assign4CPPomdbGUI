@@ -169,11 +169,11 @@ public:
             episodes.push_back(ep);
          }
 
-         title = seriesObj["Title"];
-         overallRating = seriesObj["imdbRating"];
-         genre = seriesObj["Genre"];
-         poster = seriesObj["Poster"];
-         plot = seriesObj["Plot"];
+         title = seriesObj["Title"].asString();
+         overallRating = seriesObj["imdbRating"].asString();
+         genre = seriesObj["Genre"].asString();
+         poster = seriesObj["Poster"].asString();
+         plot = seriesObj["Plot"].asString();
          
 
          SeriesSeason s(title, seasonNum, overallRating, genre, poster, plot, episodes);
