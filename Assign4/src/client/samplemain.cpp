@@ -269,7 +269,7 @@ public:
                   md = searchLibrary->get(item->label());
                }
                for ( int i = 0 ; i < md.episodes.size(); i++) {
-                  if (parentLabel==md.episodes[i].title){
+                  if (item->label()==md.episodes[i].title){
                      seriesSeasonInput->value(md.episodes[i].title.c_str());
                      episodeInput->value(std::to_string(md.episodes[i].episode).c_str());
                      ratingInput->value(md.episodes[i].rating.c_str());
