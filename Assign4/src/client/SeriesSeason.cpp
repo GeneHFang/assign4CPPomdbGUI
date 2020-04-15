@@ -117,7 +117,7 @@ SeriesSeason::SeriesSeason(string jsonString){
             } else if (*i=="Episodes"){
                 auto jsonEpisodes = jsonObj[*i];
                 for (Json::Value::ArrayIndex i = 0 ; i != jsonEpisodes.size(); i++){
-                    Episode ep(jsonEpisodes[i]);
+                    Episode * ep = new Episode(jsonEpisodes[i]);
                     
                     /* Goes into Episode constructor
                     string t = jsonEpisodes[i]["Title"].asString();
