@@ -192,6 +192,7 @@ public:
          o->genreInput->value(genre.c_str());
          o->ratingInput->value(overallRating.c_str());
          o->png = new Fl_JPEG_Image("temp.jpg");
+         o->box = new Fl_Box(350,180,320-20,320-20);
          o->box->image(o->png);
          o->summaryMLI->value(plot.c_str());
          o->summaryMLI->wrap(1);
