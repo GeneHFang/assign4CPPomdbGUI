@@ -159,7 +159,7 @@ public:
          bool parseSeriesSuccess = reader.parse(seriesString, seriesObj, false);
 
          std::string title, overallRating, genre, poster, plot, libKey;
-         int seasonNum = o->seasonSrchInput->value();
+         int seasonNum = std::stoi(o->seasonSrchInput->value());
 
          std::vector<Episode> episodes;
 
