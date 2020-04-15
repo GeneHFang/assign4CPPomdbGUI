@@ -184,7 +184,7 @@ public:
       show();
    }
 
-   addToTree(map<string, SeriesSeason> lib ){
+   void addToTree(map<string, SeriesSeason> lib ){
       cout << "test!" << endl;
    }
 };
