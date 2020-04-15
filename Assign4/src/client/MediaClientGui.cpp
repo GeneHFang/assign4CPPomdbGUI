@@ -171,9 +171,9 @@ public:
       ratingInput->value("");
       ratingInput->readonly(1);
 
-      // box = new Fl_Box(350,180,320-20,320-20);
-      // png = new Fl_JPEG_Image("temp.jpg");
-      // box->image(png);
+      box = new Fl_Box(350,180,320-20,320-20);
+      png = new Fl_JPEG_Image("temp.jpg");
+      box->image(png);
 
       summaryMLI = new Fl_Multiline_Input(665,180,300,300,0);
       summaryMLI->wrap(1);
