@@ -165,8 +165,8 @@ public:
 
          auto jsonEps = seasonObj["Episodes"];
          for (Json::Value::ArrayIndex i = 0 ; i != jsonEps.size() ; i++){
-            Episode ep = new Episode(jsonEps[i]);
-            episodes.push_back(ep);
+            Episode * ep = new Episode(jsonEps[i]);
+            episodes.push_back(*ep);
             delete ep;
          }
 
