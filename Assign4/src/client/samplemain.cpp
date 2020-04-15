@@ -178,8 +178,7 @@ public:
 
          SeriesSeason s(title, seasonNum, overallRating, genre, poster, plot, episodes);
          
-         o->searchLibrary->addToLibrary(s);
-         o->searchLibrary->printMap();
+         o->addToLibrary(o->searchLibrary, s);
 
          o->tree->add("Test/1");
          o->tree->add("Test/1");
@@ -200,6 +199,11 @@ public:
       catch ( curlpp::RuntimeError & e ) {
          std::cout << e.what() << std::endl;
       }
+   }
+
+   void addToLibrary(MediaLibrary* lib, SeriesSeasons s){
+      lib->addToLibrary(s);
+      lib->print();
    }
 
    // Static menu callback method
