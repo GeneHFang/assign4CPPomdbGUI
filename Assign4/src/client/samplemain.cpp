@@ -327,9 +327,13 @@ public:
          }
          exit(0);
       }else if(selectPath.compare("Series-Season/Add")==0){
-         cout << "Add not implemented" << endl;
+         library = new MediaLibrary(searchLibrary->media);
+         buildTree();
+         // cout << "Add not implemented" << endl;
       }else if(selectPath.compare("Series-Season/Remove")==0){
-         cout << "Remove not implemented" << endl;
+         string key = searchLibrary->media.begin()->second.titleAndSeason;
+         library->removeFromLibrary(key);
+         // cout << "Remove not implemented" << endl;
       }
    }
 
@@ -381,11 +385,25 @@ public:
       tree->clear();
       for(int i=0; i<result.size(); i++){
          cout << " " << result[i];
+         string root = result[i];
          SeriesSeason md = library->get(result[i]);
+         for (int j = 0 ; j < md.episodes.size() ; j++){
+            string epTitle =  md.episodes[j].title;
+            string add = root+"/"+epTitle; 
+            tree->add(add.c_str());
+         }
+         string close = "/"+root;
+         tree->close(close.c_str());
          cout << md.title << " " << md.titleAndSeason << " " << md.rating
               << " " << md.genre << endl;
       }
       cout << endl;
+      Fl_JPEG_Image * img = new Fl_JPEG_Image("temp.jpg");
+      box->image(img);
+      box->redraw();
+      box->show();
+      end();
+      show();
       tree->redraw();
    }
    void buildTree(MediaLibrary* m){

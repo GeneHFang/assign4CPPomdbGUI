@@ -36,16 +36,29 @@ MediaLibrary::MediaLibrary(){
    initLibraryFromJsonFile("seriesTest.json");
 }
 
+MediaLibrary::MediaLibrary(std::map<std::string, SeriesSeason> lib)
+{
+   media.insert(lib.begin(),lib.end());
+}
 
 MediaLibrary::~MediaLibrary() {
    media.clear();
 }
+
 
 bool MediaLibrary::addToLibrary(SeriesSeason ssObj){
    bool ret; 
 
    auto const [position, hasBeenAdded] = media.insert({ssObj.titleAndSeason, ssObj});
    ret = hasBeenAdded;
+
+   return ret;
+}
+
+bool MediaLibrary::removeFromLibrary(std::string key){
+   bool ret = false;
+
+   ret = (media.erase(key) != 0);
 
    return ret;
 }
