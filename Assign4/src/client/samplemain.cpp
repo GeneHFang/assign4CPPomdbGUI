@@ -279,6 +279,7 @@ public:
                genreInput->value(md.genre.c_str());
                summaryMLI->value(md.plot.c_str());
             }
+            renderImage(md.imgURL);
 
          }else{
             cout << "library entry not found" << endl;
@@ -293,6 +294,23 @@ public:
       default: {break;}
       }
       cout << "Callback reason: " << aStr.c_str() << endl;
+   }
+   
+   //reload Image
+   void renderImage(std::string imageURL){
+      std::ofstream file;
+      file.open("temp.jpg");
+      curlpp::Easy imageRequest;
+      imageRequest.setOpt(new curlpp::options::WriteStream(&file));
+      imageRequest.setOpt(new curlpp::options::Url(imageURL));
+      imageRequest.perform();
+      file.close();
+      Fl_JPEG_Image * img = new Fl_JPEG_Image("temp.jpg");
+      box->image(img);
+      box->redraw();
+      box->show();
+      end();
+      show();
    }
 
    // Static menu callback method
@@ -422,7 +440,6 @@ public:
             cout << md.title << " " << md.titleAndSeason << " " << md.rating
                << " " << md.genre << endl;
          }
-         cout << endl;
          Fl_JPEG_Image * img = new Fl_JPEG_Image("temp.jpg");
          box->image(img);
          box->redraw();
