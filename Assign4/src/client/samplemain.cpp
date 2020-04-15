@@ -358,7 +358,7 @@ public:
          string root = result[i];
          SeriesSeason md = m->get(result[i]);
          for (int j = 0 ; j < md.episodes.size() ; j++){
-            string epTitle =  md.episodes[i].title;
+            string epTitle =  md.episodes[j].title;
             string add = root+"/"+epTitle; 
             tree->add(add.c_str());
          }
