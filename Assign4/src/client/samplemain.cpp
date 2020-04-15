@@ -385,7 +385,7 @@ public:
               << " " << md.genre << endl;
       }
       cout << endl;
-      Fl_JPEG_Image * img = new Fl_JPEG_Image("test.jpg");
+      Fl_JPEG_Image * img = new Fl_JPEG_Image("temp.jpg");
       box->image(img);
       box->show();
       end();
