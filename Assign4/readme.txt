@@ -1,14 +1,17 @@
 Author: Tim Lindquist (Tim.Lindquist@asu.edu)
+        Gene H Li (ghli1@asu.edu)
         Software Engineering, CIDSE, IAFSE, Arizona State University Polytechnic
-Version: January 2020
+Version: April 2020
 
 See http://pooh.poly.asu.edu/Ser321/Assigns/Assign4/assign4.html
 
-Purpose: Sample C++ program demonstrating Ant builds and an FLTK
+Purpose: Assignment 4 based on sample C++ program demonstrating Ant builds and an FLTK
  GUI for SeriesSeason Browser.
 
 This program is has been tested on Linux and MacOS (build.xml only works on
 Linux).
+
+*****NOTE: series.json is replaced with seriesTest.json******
 
 To execute Ant using the build.xml in this directory, you will need to
 copy the file: antlibs.jar from the lib directory to your home directory:
