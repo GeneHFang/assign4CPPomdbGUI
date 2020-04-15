@@ -13,6 +13,7 @@
 #include <ctime>
 #include <stdlib.h>
 #include <sstream>
+#include <fstream>
 #include <thread>
 #include <json/json.h>
 #include <curlpp/cURLpp.hpp>
