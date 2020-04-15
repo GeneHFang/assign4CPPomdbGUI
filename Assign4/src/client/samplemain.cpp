@@ -323,19 +323,19 @@ public:
    // Menu selection instance method that has ccess to instance vars.
    void Menu_Clicked() {
       
-      std::cout << "before char size 80 is created" << std::endl;
+      // std::cout << "before char size 80 is created" << std::endl;
       char picked[80];
       menubar->item_pathname(picked, sizeof(picked)-1);
       string selectPath(picked);
-      cout << "Selected Menu Path: " << selectPath << endl;
+      // cout << "Selected Menu Path: " << selectPath << endl;
       // Handle menu selections
       if(selectPath.compare("File/Save")==0){
          bool restSave = library->toJsonFile("seriesTest.json");
-         cout << "Save not implemented" << endl;
+         // cout << "Save not implemented" << endl;
       }else if(selectPath.compare("File/Restore")==0){
          //Restore tree from seriesTest
-
-         cout << "Restore not implemented" << endl;
+         library->initLibraryFromJsonFile("seriesTest.json")
+         // cout << "Restore not implemented" << endl;
       }else if(selectPath.compare("File/Tree Refresh")==0){
          buildTree();
       }else if(selectPath.compare("File/Exit")==0){
