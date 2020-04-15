@@ -201,7 +201,7 @@ public:
       }
    }
 
-   void addToLibrary(MediaLibrary lib, SeriesSeason s){
+   void addToLibrary(MediaLibrary * lib, SeriesSeason s){
       lib->addToLibrary(s);
       lib->printMap();
    }
