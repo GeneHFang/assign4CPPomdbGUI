@@ -111,7 +111,8 @@ string Episode::toString(){
     Json::Value jsonObj;
     string ret = "{}";
     jsonObj = toJson();
-    ret = jsonObj.asString();
+    Json::FastWriter fw;
+    ret = fw.write(jsonObj);
     return ret;
 }
 
