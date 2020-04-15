@@ -125,7 +125,7 @@ SeriesSeason::SeriesSeason(string jsonString){
                     string rate = jsonEpisodes[i]["imdbRating"].asString();
                     Episode ep(t, num, rate);
                     */
-                    episodes.push_back(ep);
+                    episodes.push_back(*ep);
                 }
             }
         }
