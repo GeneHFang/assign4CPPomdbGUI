@@ -158,7 +158,7 @@ public:
          bool parseSeasonSuccess = reader.parse(seasonString, seasonObj, false);
          bool parseSeriesSuccess = reader.parse(seriesString, seriesObj, false);
 
-         std::string title, overallRating, genre, poster, plot, libKey;
+         std::string title, overallRating, genre, poster, plot;
          int seasonNum = std::stoi(o->seasonSrchInput->value());
 
          std::vector<Episode> episodes;
@@ -177,6 +177,10 @@ public:
          
 
          SeriesSeason s(title, seasonNum, overallRating, genre, poster, plot, episodes);
+         searchLibrary->addToLibrary(s);
+         searchLibrary->printMap();
+         //Debugging stuff
+         /*
          s.print();
          SeriesSeason test(s.toString());
          std::cout << "Parse back into obj version : " << std::endl; 
@@ -184,6 +188,7 @@ public:
          std::cout << "Series :"<< seriesString << std::endl;
          
          std::cout << "Season : "<< seasonString << std::endl;
+         */
       }catch ( curlpp::LogicError & e ) {
          std::cout << e.what() << std::endl;
       }

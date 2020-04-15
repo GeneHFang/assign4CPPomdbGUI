@@ -36,8 +36,18 @@ MediaLibrary::MediaLibrary(){
    initLibraryFromJsonFile("seriesTest.json");
 }
 
+
 MediaLibrary::~MediaLibrary() {
    media.clear();
+}
+
+bool MediaLibrary::addToLibrary(SeriesSeason ssObj){
+   bool ret; 
+
+   auto const [position, hasBeenAdded] = media.insert({ssObj.titleAndSeason, ssObj});
+   ret = hasBeenAdded;
+
+   return ret;
 }
 
 bool MediaLibrary::initLibraryFromJsonFile(string jsonFileName){
@@ -61,8 +71,7 @@ bool MediaLibrary::initLibraryFromJsonFile(string jsonFileName){
    return ret;
 }
 
-bool MediaLibrary::toJsonFile(string jsonFileName){
-   bool ret = false;
+Json::Value MediaLibrary::getJson(){
    Json::Value jsonLib;
    for(std::map<string,SeriesSeason>::iterator i = media.begin();
                                                          i!= media.end(); i++){
@@ -72,10 +81,20 @@ bool MediaLibrary::toJsonFile(string jsonFileName){
       Json::Value jsonMedia = aMedia.toJson();
       jsonLib[key] = jsonMedia;
    }
+   return jsonLib;
+}
+
+bool MediaLibrary::toJsonFile(string jsonFileName){
+   bool ret = false;
+   Json::Value jsonLib = getJson();
    Json::StyledStreamWriter ssw("  ");
    std::ofstream jsonOutFile(jsonFileName.c_str(), std::ofstream::binary);
    ssw.write(jsonOutFile, jsonLib);
    return true;
+}
+
+void MediaLibrary::printMap(){
+   std::cout << getJson().asStyleString() << std::endl;
 }
 
 SeriesSeason MediaLibrary::get(string aTitle){

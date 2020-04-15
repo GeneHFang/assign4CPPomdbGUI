@@ -36,8 +36,11 @@ public:
    MediaLibrary();
    ~MediaLibrary();
 
+   Json::Value getJson();
+   bool addToLibrary(SeriesSeason ss);
    bool initLibraryFromJsonFile(string jsonFileName);
    bool toJsonFile(string jsonFileName);
+   void printMap();
    string serviceInfo();
    SeriesSeason get(string aTitle);
    std::vector<string> getTitles();
