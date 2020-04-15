@@ -360,10 +360,10 @@ public:
          for (int j = 0 ; j < md.episodes.size() ; j++){
             string epTitle =  md.episodes[i].title;
             string add = root+"/"+epTitle; 
-            tree->add(add);
+            tree->add(add.c_str);
          }
          string close = "/"+root;
-         tree->close(close);
+         tree->close(close.c_str);
          cout << md.title << " " << md.titleAndSeason << " " << md.rating
               << " " << md.genre << endl;
       }
