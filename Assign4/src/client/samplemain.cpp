@@ -320,7 +320,7 @@ public:
 
          cout << "Restore not implemented" << endl;
       }else if(selectPath.compare("File/Tree Refresh")==0){
-         buildTree();
+         buildTree(library);
       }else if(selectPath.compare("File/Exit")==0){
          if(playThread && playThread->joinable()){
             playThread->join();
@@ -328,7 +328,7 @@ public:
          exit(0);
       }else if(selectPath.compare("Series-Season/Add")==0){
          library = new MediaLibrary(searchLibrary->media);
-         buildTree();
+         buildTree(library);
          // cout << "Add not implemented" << endl;
       }else if(selectPath.compare("Series-Season/Remove")==0){
          string key = searchLibrary->media.begin()->second.titleAndSeason;
