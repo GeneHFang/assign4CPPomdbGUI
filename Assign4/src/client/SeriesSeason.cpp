@@ -44,7 +44,7 @@ SeriesSeason::SeriesSeason(string ptitle, int pseason, string prating,
     string pgenre, string pimgurl, string pplot, vector<Episode> pepisodes){
     cout << "SS values constructor" << endl;
     title=ptitle;
-    titleAndSeason=ptitle+" - Season "+pseason;
+    titleAndSeason=ptitle+" - Season "+to_string(pseason);
     season = pseason;
     rating = prating;
     genre = pgenre;
