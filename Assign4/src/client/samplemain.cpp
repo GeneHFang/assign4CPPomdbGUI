@@ -184,7 +184,7 @@ public:
          o->ratingInput->value(overallRating.c_str());
          o->png = new Fl_PNG_Image(poster.c_str());
          o->box->image(o->png);
-         o->summaryMLI->value(plot.c_str);
+         o->summaryMLI->value(plot.c_str());
          o->summaryMLI->wrap(1);
          o->summaryMLI->readonly(1);
 
