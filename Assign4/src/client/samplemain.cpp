@@ -348,6 +348,7 @@ public:
          }
          exit(0);
       }else if(selectPath.compare("Series-Season/Add")==0){ //add current search result to library
+         searchLibrary->printMap();
          library->addLibrary(searchLibrary->media);
          buildTree();
          // cout << "Add not implemented" << endl;
